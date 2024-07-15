@@ -3,13 +3,13 @@ import React from 'react'
 const Reasons = () => {
   return (
     <div className='w-full py-12'>
-        <div className='conatiner mx-auto flex justify-center items-center'>
+        <div className='conatiner mx-auto flex justify-center items-center flex-col sm:flex-row'>
             <div className='flex justify-center items-center flex-col text-center'>
                 <h1 className='text-[32px]'>Peaceful Coexistence <br /> <span className='text-[#0A453A]'>Human & Animals</span></h1>
                 <img src="/assets/adoption.png" alt="adoption" />
             </div>
 
-            <div className='flex justify-center gap-8 items-start'>
+            <div className='flex flex-col sm:flex-row justify-center gap-8 items-start'>
 
                 <div className='flex flex-col gap-8 justify-center items-start'>
                     <div className='rounded-xl border-2 p-4 w-[350px] gap-4 flex flex-col justify-center items-start'>
