@@ -16,8 +16,24 @@ const UserSchema = new Schema({
     },
     posts: {
         type: Array
+    },
+    favorites: {
+        type: Array
+    },
+    description: {
+        phone: {
+            type: String,
+        },
+        email: {
+            type: String,
+        },
+        text: {
+            type: String,
+        },
+        location: {
+            type: String,
+        }
     }
-
 })
 
 const User = models.User || model("User", UserSchema);

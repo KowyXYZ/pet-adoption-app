@@ -71,10 +71,14 @@ const Navbar = () => {
                     <DropdownMenuContent>
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Profile</DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <Link href='/profile'>Profile</Link>
+                        </DropdownMenuItem>
                         <DropdownMenuItem>Favourites</DropdownMenuItem>
                         <DropdownMenuItem>Create Post</DropdownMenuItem>
-                        <DropdownMenuItem>Log Out</DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <button onClick={() => signOut()}>Sign Out</button>
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                     </DropdownMenu>
                 </div>

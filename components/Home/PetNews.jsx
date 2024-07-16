@@ -6,7 +6,7 @@ const PetNews = () => {
         {/* placeholder */}
         <div className='container mx-auto gap-12 flex justify-center items-center flex-col'>
             <h1 className='text-[32px]'>Pet News</h1>
-            <div className='flex  flex-wrap gap-12 justify-center items-center'>
+            <div className='flex  flex-wrap gap-8 justify-center items-center'>
                 <div className='gap-4 shadow-xl w-[300px] p-2 flex flex-col border-2 rounded-2xl pb-4'>
                     <img src="/assets/news.png" alt="card"  className='rounded-t-2xl'/>
                     <p className='text-[20px]'>Dog Breeds</p>
