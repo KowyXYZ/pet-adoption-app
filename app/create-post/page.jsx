@@ -1,6 +1,35 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { useSession } from 'next-auth/react'
+import { ColorPicker } from 'antd';
 
 const page = () => {
+
+
+     const {data: session} = useSession()
+
+    const [alignment, setAlignment] = useState(null);
+
+    const handleChange = (event, newAlignment) => {
+        setAlignment(newAlignment);
+
+      };
+
+      useEffect(() => {
+        console.log(alignment); // This will log the updated value of alignment whenever it changes
+    }, [alignment]); // Dependency array ensures this effect runs whenever alignment changes
+
+
+    if (!session) {
+        return (
+            <div className='py-96 text-center items-center'>
+                <p>Please sign in to view this page.</p>
+            </div>
+        );
+    }
+
   return (
     <div className='w-full py-12'>
         <div className='container mx-auto flex justify-center gap-24 items-center'>
@@ -18,43 +47,59 @@ const page = () => {
                 <div className='flex jusitfy-center gap-24 items-center '>
                     <div className='flex flex-col justify-center items-start gap-1'>
                         <label className='uppercase font-semibold'>Pet Name</label>
-                        <input className='p-2 outline-none shadow-lg border-[1px] rounded-md w-[300px]' type="text" placeholder="Pet's Name"/>
+                        <input className='p-2 outline-none shadow-lg border-[1px] rounded-md w-[300px] rounded-lg'  type="text" placeholder="Pet's Name"/>
                     </div>
 
                     <div className='flex flex-col justify-center items-start gap-1'>
                         <label className='uppercase font-semibold'>Pet Breed</label>
-                        <input className='p-2 outline-none shadow-lg border-[1px] w-[300px]' type="text" placeholder="Pet's Breed"/>
+                        <input className='p-2 outline-none shadow-lg border-[1px] w-[300px] rounded-lg' type="text" placeholder="Pet's Breed"/>
                     </div>
                 </div>
                 
 
                 <div className='flex jusitfy-center gap-24 items-center '>
-                    <div className='flex flex-col justify-center items-start gap-1'>
-                        <label className='uppercase font-semibold'>Pet Gender</label>
-                        <input className='p-2 outline-none shadow-lg border-[1px] rounded-md w-[300px]' type="text" placeholder="Pet's Gender"/>
-                    </div>
-
+                
                     <div className='flex flex-col justify-center items-start gap-1'>
                         <label className='uppercase font-semibold'>Pet Size</label>
-                        <input className='p-2 outline-none shadow-lg border-[1px] w-[300px]' type="text" placeholder="Pet's Size"/>
+                        <input className='p-2 outline-none shadow-lg border-[1px] w-[300px] rounded-lg' type="text" placeholder="Pet's Size"/>
                     </div>
+
+                    <div className='flex flex-col justify-center items-start gap-1 w-[300px]'>
+                        <label className='uppercase font-semibold'>Pet Gender</label>
+                        <div>
+                        <ToggleButtonGroup
+                           
+                            value={alignment}
+                            exclusive
+                            onChange={handleChange}
+                            aria-label="Platform"
+                            >
+                            <ToggleButton  color="primary" className=" w-[150px] h-[40px]" value="male">Male</ToggleButton>
+                            <ToggleButton  color="secondary" className=" w-[150px] h-[40px]" value="female">Female</ToggleButton>
+
+                            </ToggleButtonGroup>
+                        </div>
+                    </div>
+                    
                 </div>
 
                 <div className='flex jusitfy-center gap-24 items-center '>
                     <div className='flex flex-col justify-center items-start gap-1'>
                         <label className='uppercase font-semibold'>Pet Age</label>
-                        <input className='p-2 outline-none shadow-lg border-[1px] rounded-md w-[300px]' type="text" placeholder="Pet's Age"/>
+                        <input className='p-2 outline-none shadow-lg border-[1px] rounded-lg w-[300px]' type="text" placeholder="Pet's Age"/>
                     </div>
 
                     <div className='flex flex-col justify-center items-start gap-1'>
                         <label className='uppercase font-semibold'>Pet Color</label>
-                        <input className='p-2 outline-none shadow-lg border-[1px] w-[300px]' type="text" placeholder="Pet's Color"/>
+                        <ColorPicker defaultValue="#1677ff" className='w-[300px]' size="large" showText />
                     </div>
                 </div>
 
-                <div className='flex justify-center items-center'>
-                     <button className='bg-[#675BC8] py-2 px-4 w-1/2 text-[#fff] rounded-sm'>Next</button>
+                <div className='flex justify-center items-center mt-8'>
+                     <button className='bg-[#675BC8] py-2 px-4 w-1/2 text-[#fff] rounded-lg'>Next</button>
                 </div>
+
+               
             </div>
         </div>
     </div>
