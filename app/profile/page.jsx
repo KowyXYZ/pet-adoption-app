@@ -44,7 +44,7 @@ const page = () => {
 
   return (
     <div className='w-full py-12'>
-        <div className='container mx-auto flex justify-center gap-44 items-center '>
+        <div className='container mx-auto flex justify-center gap-64 items-center '>
             <div className='flex justify-center items-center gap-4'>
             {!imageError ? (
                     <img
@@ -231,7 +231,7 @@ const page = () => {
                 </div>
           </div>
 
-          <h1 className='underline'>See more...</h1>
+          <h1 className='underline mt-12'>See more...</h1>
         </div>
 
     </div>

@@ -75,7 +75,9 @@ const Navbar = () => {
                             <Link href='/profile'>Profile</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem>Favourites</DropdownMenuItem>
-                        <DropdownMenuItem>Create Post</DropdownMenuItem>
+                        <DropdownMenuItem>
+                               <Link href='/create-post'>Create Post</Link>
+                        </DropdownMenuItem>
                         <DropdownMenuItem>
                             <button onClick={() => signOut()}>Sign Out</button>
                         </DropdownMenuItem>
