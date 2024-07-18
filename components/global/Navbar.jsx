@@ -74,7 +74,6 @@ const Navbar = () => {
                         <DropdownMenuItem>
                             <Link href='/profile'>Profile</Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>Favourites</DropdownMenuItem>
                         <DropdownMenuItem>
                                <Link href='/create-post'>Create Post</Link>
                         </DropdownMenuItem>

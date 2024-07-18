@@ -21,6 +21,7 @@ const UserSchema = new Schema({
         type: Array
     },
     description: {
+        
         phone: {
             type: String,
         },
