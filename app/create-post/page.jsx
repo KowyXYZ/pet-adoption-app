@@ -7,6 +7,8 @@ import { useSession } from 'next-auth/react'
 import { ColorPicker } from 'antd';
 import { FormControl, InputLabel, MenuItem } from '@mui/material';
 
+import { UploadButton } from "@/utils/uploadthing";
+
 const page = () => {
 
 
@@ -117,8 +119,30 @@ const page = () => {
                     </div>
                 </div>
 
+                <div className='flex flex-col justify-center items-start gap-2'>
+                    <label className='uppercase font-semibold'>Description</label>
+                    <textarea cols='4' className='p-2 resize-none outline-none shadow-lg border-[1px] rounded-lg w-full' type="text" placeholder="Description"/>
+                </div>
+
                 <div className='flex justify-center items-center mt-8'>
                      <button className='bg-[#675BC8] py-2 px-4 w-1/2 text-[#fff] rounded-lg'>Post</button>
+                </div>
+
+                <div>
+                    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+                    <UploadButton
+                            endpoint="imageUploader"
+                            onClientUploadComplete={(res) => {
+                                // Do something with the response
+                                console.log("Files: ", res);
+                                alert("Upload Completed");
+                            }}
+                            onUploadError={(error) => {
+                                // Do something with the error.
+                                alert(`ERROR! ${error.message}`);
+                            }}
+                        />
+                    </main>
                 </div>
 
                
