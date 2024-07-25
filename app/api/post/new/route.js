@@ -14,7 +14,9 @@ export const POST = async(req, res) => {
         age,
         color,
         text,
-        image} = await req.json()
+        image,
+        location,
+        creatorId} = await req.json()
 
 
     try {
@@ -29,7 +31,9 @@ export const POST = async(req, res) => {
                     age: age,
                     color: color,
                     text: text,
-                    image: image
+                    image: image,
+                    location: location,
+                    creatorId: creatorId,
         })
 
         await newPost.save()

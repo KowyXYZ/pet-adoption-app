@@ -28,8 +28,29 @@ const page = () => {
         text: ''
      })
 
+     const [userData, setUserData] = useState([]);
+
+
+     useEffect(() => {
+        const fetchUserData = async () => {
+          try {
+            const userId = session?.user?.id;
+            const response = await fetch(`/api/profile/${userId}`);
+            const data = await response.json();
+            setUserData(data);
+          } catch (error) {
+            console.error('Error fetching user data:', error);
+          }
+        };
+      
+        if (session?.user?.id) {
+          fetchUserData();
+        }
+      }, [session?.user?.id]); // Add session?.user?.id to the dependency array
+
      const handleChangeSize = (event) => {
         setPostInfo({...postInfo, size: event.target.value});
+        setSize(event.target.value)
      };
 
     const [alignment, setAlignment] = useState(null);
@@ -44,6 +65,7 @@ const page = () => {
         setPostInfo({...postInfo, gender: alignment});// This will log the updated value of alignment whenever it changes
     }, [alignment]); // Dependency array ensures this effect runs whenever alignment changes
 
+    console.log(userData)
 
     if (!session) {
         return (
@@ -53,9 +75,21 @@ const page = () => {
         );
     }
 
-    console.log(postInfo.name)
-
     const handlePost = async() => {
+
+        if (
+            postInfo.name === '' ||
+            postInfo.breed === '' ||
+            postInfo.size === '' ||
+            postInfo.gender === '' ||
+            postInfo.age === '' ||
+            postInfo.color === '' ||
+            postInfo.text === ''
+        ) {
+            alert('One or more fields are empty');
+            return; // Exit the function if any field is empty
+        }
+
         try {
             const response = await fetch('/api/post/new', {
                 method: "POST",
@@ -68,7 +102,9 @@ const page = () => {
                     age: postInfo.age,
                     color: postInfo.color,
                     text: postInfo.text,
-                    image: image
+                    image: image,
+                    location: userData?.description?.location,
+                    creatorId: userData?.id,
                 })
             })
             
@@ -118,12 +154,12 @@ const page = () => {
                 <div className='flex jusitfy-center gap-24 items-center '>
                     <div className='flex flex-col justify-center items-start gap-2'>
                         <label className='uppercase font-semibold'>Pet Name</label>
-                        <input onChange={(e) => setPostInfo({...postInfo, name: e.target.value})} className='p-2 outline-none shadow-lg border-[1px]  w-[300px] rounded-lg'  type="text" placeholder="Pet's Name"/>
+                        <input maxLength={12} required onChange={(e) => setPostInfo({...postInfo, name: e.target.value})} className='p-2 outline-none shadow-lg border-[1px]  w-[300px] rounded-lg'  type="text" placeholder="Pet's Name"/>
                     </div>
 
                     <div className='flex flex-col justify-center items-start gap-2'>
                         <label className='uppercase font-semibold'>Pet Breed</label>
-                        <input onChange={(e) => setPostInfo({...postInfo, breed: e.target.value})} className='p-2 outline-none shadow-lg border-[1px] w-[300px] rounded-lg' type="text" placeholder="Pet's Breed"/>
+                        <input maxLength={10} required onChange={(e) => setPostInfo({...postInfo, breed: e.target.value})} className='p-2 outline-none shadow-lg border-[1px] w-[300px] rounded-lg' type="text" placeholder="Pet's Breed"/>
                     </div>
                 </div>
                 
@@ -135,6 +171,7 @@ const page = () => {
                         <FormControl className='w-[300px] text-start outline-none' size='small' >
                               <InputLabel className={size.length > 0 ? 'hidden' : 'block'}>Size</InputLabel>
                             <Select
+                                required
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={size}
@@ -153,7 +190,7 @@ const page = () => {
                         <label className='uppercase font-semibold'>Pet Gender</label>
                         <div>
                         <ToggleButtonGroup
-                           
+                            required
                             value={alignment}
                             exclusive
                             onChange={handleChange}
@@ -171,18 +208,18 @@ const page = () => {
                 <div className='flex jusitfy-center gap-24 items-center '>
                     <div className='flex flex-col justify-center items-start gap-2'>
                         <label className='uppercase font-semibold'>Pet Age</label>
-                        <input  onChange={(e) => setPostInfo({...postInfo, age: e.target.value})} className='p-2 outline-none shadow-lg border-[1px] rounded-lg w-[300px]' type="text" placeholder="Pet's Age"/>
+                        <input maxLength={3} required  onChange={(e) => setPostInfo({...postInfo, age: e.target.value})} className='p-2 outline-none shadow-lg border-[1px] rounded-lg w-[300px]' type="text" placeholder="Pet's Age (enter how many months)"/>
                     </div>
 
                     <div className='flex flex-col justify-center items-start gap-2'>
                         <label className='uppercase font-semibold'>Pet Color</label>
-                        <ColorPicker onChange={(c) => setPostInfo({...postInfo, color: c.toHexString()})} defaultValue="#1677ff" className='w-[300px]' size="large" showText />
+                        <ColorPicker required onChange={(c) => setPostInfo({...postInfo, color: c.toHexString()})} defaultValue="#1677ff" className='w-[300px]' size="large" showText />
                     </div>
                 </div>
 
                 <div className='flex flex-col justify-center items-start gap-2'>
                     <label className='uppercase font-semibold'>Description</label>
-                    <textarea  onChange={(e) => setPostInfo({...postInfo, text: e.target.value})} cols='4' className='p-2 resize-none outline-none shadow-lg border-[1px] rounded-lg w-full' type="text" placeholder="Description"/>
+                    <textarea required minLength={5} maxLength={32} onChange={(e) => setPostInfo({...postInfo, text: e.target.value})} cols='4' className='p-2 resize-none outline-none shadow-lg border-[1px] rounded-lg w-full' type="text" placeholder="Description"/>
                 </div>
 
                 <div className='flex justify-center items-center mt-8'>

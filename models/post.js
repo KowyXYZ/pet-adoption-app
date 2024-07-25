@@ -31,6 +31,12 @@ const postSchema = new Schema({
     },
     image: {
         type: 'String'
+    },
+    location: {
+        type: 'String'
+    },
+    creatorId: {
+        type: 'String'
     }
 })
 
