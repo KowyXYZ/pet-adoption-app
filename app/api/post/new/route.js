@@ -16,7 +16,12 @@ export const POST = async(req, res) => {
         text,
         image,
         location,
-        creatorId} = await req.json()
+        creatorId,
+        canLiveWithChildren,
+        vaccinated,
+        houseTrained,
+        neutrated,
+        microchipped} = await req.json()
 
 
     try {
@@ -34,6 +39,11 @@ export const POST = async(req, res) => {
                     image: image,
                     location: location,
                     creatorId: creatorId,
+                    canLiveWithChildren: canLiveWithChildren,
+                    vaccinated: vaccinated,
+                    houseTrained: houseTrained,
+                    neutrated: neutrated,
+                    microchipped: microchipped,
         })
 
         await newPost.save()

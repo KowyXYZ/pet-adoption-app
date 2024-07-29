@@ -3,41 +3,56 @@ import { Schema, model, models } from "mongoose";
 
 const postSchema = new Schema({
     creator: {
-        type: 'String',
+        type: String,
         required: [true, 'creator is requred']
     },
     name: {
-        type: 'String',
+        type: String,
         required: [true, 'Text is Required'],
     },
     breed: {
-        type: 'String',
+        type: String,
         required: [true, 'Tag is required']
     },
     size: {
-        type: 'String'
+        type: String
     },
     gender: {
-        type: "string"
+        type: String
     },
     age: {
-        type: "string"
+        type: String
     },
     color: {
-        type: 'String'
+        type: String
     },
     text: {
-        type: 'String'
+        type: String
     },
     image: {
-        type: 'String'
+        type: String
     },
     location: {
-        type: 'String'
+        type: String
     },
     creatorId: {
-        type: 'String'
-    }
+        type: String
+    },
+    canLiveWithChildren: {
+        type: Boolean
+    },
+    vaccinated: {
+        type: Boolean
+    },
+    houseTrained: {
+        type: Boolean
+    },
+    neutrated: {
+        type: Boolean
+    },
+    microchipped: {
+        type: Boolean
+    },
 })
 
 const Post = models.Post || model('Post', postSchema)

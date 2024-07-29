@@ -26,18 +26,25 @@ const page = ({params}) => {
   return (
     <div className='container mx-auto  py-12'>
         <h1 className='text-[32px] uppercase font-black'>Hi Human !</h1>
-        <div className='flex justify-start items-start  flex-col gap-4 mt-12'>
-          <h1 className='text-[24px] text-[#0A453A] uppercase font-black underline'>{postData.name}</h1>
-          <p className='text-[18px]'><span className='text-[gray]'>Pet ID:</span> <span className='text-[#0A453A]'>{params.id.slice(0, 5)}... {params.id.slice(6, 10)}</span></p>
-          <div>
-          <div className='flex text-[18px] justify-start  items-center text-[#0A453A] font-bold'>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                            </svg>
+        <div className='flex justify-between items-center'>
+          <div className='flex justify-start items-start  flex-col gap-4 mt-12'>
+            <h1 className='text-[26px] text-[#0A453A] uppercase font-black underline'>This is: {postData.name}</h1>
+            <p className='text-[18px]'><span className='text-[gray]'>Pet ID:</span> <span className='text-[#0A453A]'>{params.id.slice(0, 5)}... {params.id.slice(6, 10)}</span></p>
+            <div>
+            <div className='flex text-[18px] justify-start  items-center text-[#0A453A] font-bold'>
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                              </svg>
 
-                            <p>{postData.location}</p>
+                              <p>{postData.location === '' ? 'Unknown' : postData.location}</p>
+            </div>
+            </div>
           </div>
+
+          <div className='border-2 p-4 px-6 flex flex-col justify-center items-center shadow-xl gap-2 rounded-xl'>
+            <p>If you are interested to adopt </p> 
+            <button className='bg-[#675BC8] text-[#fff] rounded-xl p-2 px-4'>Get started</button>
           </div>
         </div>
 
@@ -99,45 +106,90 @@ const page = ({params}) => {
             <div className='flex justify-center items-center gap-4 text-[18px]'>
               <img src="/assets/childcare.png" className='w-[25px] h-[25px] object-contain' alt="childcare" />
               <p>Can live with other children of any age</p>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" text-[#0A453A] size-6">
+
+              {
+              postData.canLiveWithChildren ? 
+
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" text-[#0A453A] size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
+              </svg> : 
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-[#db2f2f] size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            }
+             
+
+            
+
 
             </div>
 
             <div className='flex justify-center items-center gap-4 text-[18px]'>
               <img src="/assets/vaccines.png" className='w-[25px] h-[25px] object-contain' alt="childcare" />
               <p>Vaccinated</p>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" text-[#0A453A] size-6">
+              {
+              postData.vaccinated ? 
+
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" text-[#0A453A] size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
+              </svg> : 
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-[#db2f2f] size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            }
 
             </div>
 
             <div className='flex justify-center items-center gap-4 text-[18px]'>
               <img src="/assets/warehouse.png" className='w-[25px] h-[25px] object-contain' alt="childcare" />
               <p>House-Trained</p>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" text-[#0A453A] size-6">
+              {
+              postData.houseTrained ? 
+
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" text-[#0A453A] size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
+              </svg> : 
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-[#db2f2f] size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            }
 
             </div>
 
             <div className='flex justify-center items-center gap-4 text-[18px]'>
               <img src="/assets/Neutered.png" className='w-[25px] h-[25px] object-contain' alt="childcare" />
               <p>Neutrated</p>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" text-[#0A453A] size-6">
+              {
+              postData.neutrated ? 
+
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" text-[#0A453A] size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
+              </svg> : 
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-[#db2f2f] size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            }
 
             </div>
 
             <div className='flex justify-center items-center gap-4 text-[18px]'>
               <img src="/assets/wb_iridescent.png" className='w-[25px] h-[25px] object-contain' alt="childcare" />
               <p>Microchipped</p>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" text-[#0A453A] size-6">
+              {
+              postData.microchipped ? 
+
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" text-[#0A453A] size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
+              </svg> : 
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-[#db2f2f] size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            }
 
             </div>
           </div>

@@ -4,10 +4,11 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Select from '@mui/material/Select';
 import { useSession } from 'next-auth/react'
-import { ColorPicker } from 'antd';
+import { Checkbox, ColorPicker } from 'antd';
 import { FormControl, InputLabel, MenuItem } from '@mui/material';
 
 import { UploadButton } from "@/utils/uploadthing";
+import { Separator } from '@radix-ui/react-dropdown-menu';
 
 const page = () => {
 
@@ -29,6 +30,14 @@ const page = () => {
      })
 
      const [userData, setUserData] = useState([]);
+
+     
+      
+      const [canLiveWith, setCanLiveWith] = useState(false)
+      const [Vaccinated, setVaccinated] = useState(false)
+      const [houseTrained, setHouseTrained] = useState(false)
+      const [Neutrated, setNeutrated] = useState(false)
+      const [Microchipped, setMicrochipped] = useState(false)
 
 
      useEffect(() => {
@@ -65,7 +74,6 @@ const page = () => {
         setPostInfo({...postInfo, gender: alignment});// This will log the updated value of alignment whenever it changes
     }, [alignment]); // Dependency array ensures this effect runs whenever alignment changes
 
-    console.log(userData)
 
     if (!session) {
         return (
@@ -105,6 +113,11 @@ const page = () => {
                     image: image,
                     location: userData?.description?.location,
                     creatorId: userData?.id,
+                    canLiveWithChildren: canLiveWith,
+                    vaccinated: Vaccinated,
+                    houseTrained: houseTrained,
+                    neutrated: Neutrated,
+                    microchipped: Microchipped
                 })
             })
             
@@ -145,6 +158,7 @@ const page = () => {
                                     alert(`ERROR! ${error.message}`);
                                 }}
                             />
+                        <img className={image.length > 2 ? 'w-[50px] h-[50px] object-contain' : 'hidden'} src={image ? image : '/assets/error.jpg'} alt="eerrro" />
                         </main>
                     </div>
 
@@ -219,7 +233,21 @@ const page = () => {
 
                 <div className='flex flex-col justify-center items-start gap-2'>
                     <label className='uppercase font-semibold'>Description</label>
-                    <textarea required minLength={5} maxLength={32} onChange={(e) => setPostInfo({...postInfo, text: e.target.value})} cols='4' className='p-2 resize-none outline-none shadow-lg border-[1px] rounded-lg w-full' type="text" placeholder="Description"/>
+                    <textarea required minLength={5} maxLength={100} onChange={(e) => setPostInfo({...postInfo, text: e.target.value})} cols='4' className='p-2 resize-none outline-none shadow-lg border-[1px] rounded-lg w-full' type="text" placeholder="Description"/>
+                </div>
+
+                <div className='gap-2 flex justify-center flex-col  items-start font-semibold text-[18px] border-2 p-4 shadow-xl rounded-xl'>
+                  <Checkbox onChange={(e) => setCanLiveWith(e.target.checked)}>Can live with other children of any age</Checkbox>
+
+                  <Checkbox onChange={(e) => setVaccinated(e.target.checked)}>Vaccinated</Checkbox>
+                
+                  <Checkbox onChange={(e) => setHouseTrained(e.target.checked)}>House-Trained</Checkbox>
+
+                  <Checkbox onChange={(e) => setNeutrated(e.target.checked)}>Neutrated</Checkbox>
+
+                  <Checkbox onChange={(e) => setMicrochipped(e.target.checked)}>Microchipped</Checkbox>
+
+
                 </div>
 
                 <div className='flex justify-center items-center mt-8'>
