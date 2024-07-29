@@ -21,7 +21,11 @@ export const POST = async(req, res) => {
         vaccinated,
         houseTrained,
         neutrated,
-        microchipped} = await req.json()
+        microchipped,
+        adressOne,
+        adressTwo,
+        city,
+        postCode} = await req.json()
 
 
     try {
@@ -44,6 +48,10 @@ export const POST = async(req, res) => {
                     houseTrained: houseTrained,
                     neutrated: neutrated,
                     microchipped: microchipped,
+                    adressOne: adressOne,
+                    adressTwo: adressTwo,
+                    city: city,
+                    postCode: postCode
         })
 
         await newPost.save()

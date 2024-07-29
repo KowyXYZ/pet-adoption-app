@@ -53,6 +53,20 @@ const postSchema = new Schema({
     microchipped: {
         type: Boolean
     },
+    adressOne: {
+        type: String
+    },
+    adressTwo: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    postCode: {
+        type: String
+    },
+
+    
 })
 
 const Post = models.Post || model('Post', postSchema)

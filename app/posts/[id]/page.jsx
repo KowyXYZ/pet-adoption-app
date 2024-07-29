@@ -31,15 +31,25 @@ const page = ({params}) => {
             <h1 className='text-[26px] text-[#0A453A] uppercase font-black underline'>This is: {postData.name}</h1>
             <p className='text-[18px]'><span className='text-[gray]'>Pet ID:</span> <span className='text-[#0A453A]'>{params.id.slice(0, 5)}... {params.id.slice(6, 10)}</span></p>
             <div>
-            <div className='flex text-[18px] justify-start  items-center text-[#0A453A] font-bold'>
+            <div className='flex text-[18px] gap-3 justify-start  items-center text-[#0A453A] font-bold'>
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                               </svg>
 
                               <p>{postData.location === '' ? 'Unknown' : postData.location}</p>
-            </div>
-            </div>
+
+                              <div className='text-gray-400 gap-1 text-[16p] font-light flex  justify-center items-start'>
+                                <p>- {postData.adressOne && postData.adressOne}</p>
+                                {/* <p>- {postData.adressTwo && postData.adressTwo}</p> */}
+                                <p>- {postData.city && postData.city}</p>
+                                <p>- {postData.postCode && postData.postCode}</p>
+                              </div>
+                              
+                              
+               </div>
+   
+              </div>
           </div>
 
           <div className='border-2 p-4 px-6 flex flex-col justify-center items-center shadow-xl gap-2 rounded-xl'>

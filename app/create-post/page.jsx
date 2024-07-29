@@ -39,6 +39,11 @@ const page = () => {
       const [Neutrated, setNeutrated] = useState(false)
       const [Microchipped, setMicrochipped] = useState(false)
 
+      const [adressOne, setAdressOne] = useState('')
+      const [adressTwo, setAdressTwo] = useState('')
+      const [city, setCity] = useState('')
+      const [postCode, setPostCode] = useState('')
+
 
      useEffect(() => {
         const fetchUserData = async () => {
@@ -92,7 +97,11 @@ const page = () => {
             postInfo.gender === '' ||
             postInfo.age === '' ||
             postInfo.color === '' ||
-            postInfo.text === ''
+            postInfo.text === '' ||
+            postCode === '' ||
+            adressOne === '' ||
+            city === '' || 
+            image === '' 
         ) {
             alert('One or more fields are empty');
             return; // Exit the function if any field is empty
@@ -112,12 +121,16 @@ const page = () => {
                     text: postInfo.text,
                     image: image,
                     location: userData?.description?.location,
-                    creatorId: userData?.id,
+                    creatorId: userData?._id,
                     canLiveWithChildren: canLiveWith,
                     vaccinated: Vaccinated,
                     houseTrained: houseTrained,
                     neutrated: Neutrated,
-                    microchipped: Microchipped
+                    microchipped: Microchipped,
+                    adressOne: adressOne,
+                    adressTwo: adressTwo,
+                    city: city,
+                    postCode: postCode
                 })
             })
             
@@ -233,7 +246,59 @@ const page = () => {
 
                 <div className='flex flex-col justify-center items-start gap-2'>
                     <label className='uppercase font-semibold'>Description</label>
-                    <textarea required minLength={5} maxLength={100} onChange={(e) => setPostInfo({...postInfo, text: e.target.value})} cols='4' className='p-2 resize-none outline-none shadow-lg border-[1px] rounded-lg w-full' type="text" placeholder="Description"/>
+                    <textarea required minLength={5} maxLength={250} onChange={(e) => setPostInfo({...postInfo, text: e.target.value})} cols='4' className='p-2 resize-none outline-none shadow-lg border-[1px] rounded-lg w-full' type="text" placeholder="Description"/>
+                </div>
+
+                {/* adress */}
+
+                <div className='flex flex-col justify-center items-center gap-5 w-full'>
+                    <div className='flex flex-col justify-center items-start gap-2 w-full'>
+                        <label className='uppercase font-semibold'>Address line 1</label>
+                        <input
+                            maxLength={30}
+                            required
+                            onChange={(e) => setAdressOne(e.target.value)}
+                            className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
+                            type="text"
+                            placeholder="Address line 1"
+                        />
+                    </div>
+
+                    <div className='flex flex-col justify-center items-start gap-2 w-full'>
+                        <label className='uppercase font-semibold'>Address line 2</label>
+                        <input
+                            maxLength={30}
+                            required
+                            onChange={(e) => setAdressTwo(e.target.value)}
+                            className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
+                            type="text"
+                            placeholder="Address line 2"
+                        />
+                    </div>
+
+                    <div className='flex flex-col justify-center items-start gap-2 w-full'>
+                        <label className='uppercase font-semibold'>City</label>
+                        <input
+                            maxLength={30}
+                            required
+                            onChange={(e) => setCity(e.target.value)}
+                            className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
+                            type="text"
+                            placeholder="City"
+                        />
+                    </div>
+
+                    <div className='flex flex-col justify-center items-start gap-2 w-full'>
+                        <label className='uppercase font-semibold'>Postal Code</label>
+                        <input
+                            maxLength={30}
+                            required
+                            onChange={(e) => setPostCode(e.target.value)}
+                            className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
+                            type="text"
+                            placeholder="Postal Code"
+                        />
+                    </div>
                 </div>
 
                 <div className='gap-2 flex justify-center flex-col  items-start font-semibold text-[18px] border-2 p-4 shadow-xl rounded-xl'>
@@ -247,7 +312,7 @@ const page = () => {
 
                   <Checkbox onChange={(e) => setMicrochipped(e.target.checked)}>Microchipped</Checkbox>
 
-
+                 <p className='text-gray-500'>Check Boxes are not required but feel free to check them to help others!</p>
                 </div>
 
                 <div className='flex justify-center items-center mt-8'>
