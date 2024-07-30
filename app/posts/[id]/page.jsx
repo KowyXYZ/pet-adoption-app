@@ -1,5 +1,6 @@
 "use client"
 
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 const page = ({params}) => {
@@ -30,6 +31,7 @@ const page = ({params}) => {
           <div className='flex justify-start items-start  flex-col gap-4 mt-12'>
             <h1 className='text-[26px] text-[#0A453A] uppercase font-black underline'>This is: {postData.name}</h1>
             <p className='text-[18px]'><span className='text-[gray]'>Pet ID:</span> <span className='text-[#0A453A]'>{params.id.slice(0, 5)}... {params.id.slice(6, 10)}</span></p>
+            <p className='text-[gray]'>Post Creator: <Link  href={`/profile/${postData.creatorId}`} className='text-[#0A453A] underline'>{postData.creator}</Link></p>
             <div>
             <div className='flex text-[18px] gap-3 justify-start  items-center text-[#0A453A] font-bold'>
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

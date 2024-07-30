@@ -36,6 +36,34 @@ const Navbar = () => {
       const handleImageError = () => {
         setImageError(true);
       };
+
+
+
+    //   user
+    
+    const [userData, setUserData] = useState([]);
+  
+  
+    useEffect(() => {
+      const fetchUserData = async () => {
+        try {
+          const userId = session?.user?.id;
+          const response = await fetch(`/api/profile/${userId}`);
+          const data = await response.json();
+          setUserData(data);
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      };
+    
+      if (session?.user?.id) {
+        fetchUserData();
+      }
+    }, [session?.user?.id]);
+
+    console.log(userData)
+
+    const ifComplete = userData?.description?.email &&  userData?.description?.location && userData?.description?.phone
     
 
   return (
@@ -75,7 +103,7 @@ const Navbar = () => {
                             <Link href='/profile'>Profile</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem>
-                               <Link href='/create-post'>Create Post</Link>
+                              {ifComplete ?  <Link href='/create-post'>Create Post</Link> : <button onClick={() => {alert('GO SET UP YOUR PROFILE! YOU CANNOT CREATE POST OR ADOPT PETS WITHOUT SETTING UP YOUR PROFILE')}}>Create Post</button>}
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                             <button onClick={() => signOut()}>Sign Out</button>
