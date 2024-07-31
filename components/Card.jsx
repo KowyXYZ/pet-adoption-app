@@ -35,7 +35,7 @@ const Card = ({data}) => {
                             <p>Size: <span className='text-[#2E256F] py-[2px] px-[5px] rounded-3xl bg-[#b5aaff]'>{data.size}</span></p>
                        </div>
 
-                        <p>{data.text}</p>
+                        <p>{data.text.slice(0, 60)}...</p>
 
                         <div className='w-full justify-center items-center flex text-center'>
                          <Link href={`/posts/${data._id}`} className='transition-all w-full delay-100 ease-in-out border-[#675BC8] text-[18px] rounded-xl  py-2 px-4 text-[#675BC8] border-2 hover:bg-[#675BC8] hover:text-[#fff]'>More Info</Link>

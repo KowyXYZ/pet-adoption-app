@@ -56,7 +56,7 @@ const page = ({params}) => {
 
           <div className='border-2 p-4 px-6 flex flex-col justify-center items-center shadow-xl gap-2 rounded-xl'>
             <p>If you are interested to adopt </p> 
-            <button className='bg-[#675BC8] text-[#fff] rounded-xl p-2 px-4'>Get started</button>
+            <Link href={`/posts/${params.id}/adopt`} className='bg-[#675BC8] text-[#fff] rounded-xl p-2 px-4'>Get started</Link>
           </div>
         </div>
 
