@@ -48,8 +48,11 @@ const page = ({params}) => {
 
 
   return (
-    <div className='w-full py-12'>
+    <div className='w-full py-24 pb-56 '>
         <div className='container mx-auto flex-col flex justify-center items-center gap-5'>
+            <div className='flex justify-center items-center py-12'>
+              <img src="/assets/step1.png" className='w-[850px]  object-contain' alt="step" />
+            </div>
             <div className='flex justify-center items-center gap-24 border-2 p-6 shadow-xl rounded-2xl'>
                 {!imageError ? (
                     <img
@@ -80,59 +83,9 @@ const page = ({params}) => {
                 <button disabled className='bg-[#675BC8] text-[#fff] rounded-xl p-2 px-4'>Fill the rest of the information to continue</button>}
             </div>
 
+       
+
             {/* <div className='flex justify-center items-center flex-col gap-4 mt-12 w-1/3'>
-                <h1 className='font-black text-[18px] opacity-90'>Address</h1>
-
-                  <div className='flex flex-col justify-center items-start gap-2 w-full'>
-                        <label className='uppercase font-semibold'>Address line 1</label>
-                        <input
-                            maxLength={30}
-                            required
-                            onChange={(e) => e}
-                            className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
-                            type="text"
-                            placeholder="Address line 1"
-                        />
-                    </div>
-
-                    <div className='flex flex-col justify-center items-start gap-2 w-full'>
-                        <label className='uppercase font-semibold'>Address line 2</label>
-                        <input
-                            maxLength={30}
-                            required
-                            onChange={(e) => e}
-                            className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
-                            type="text"
-                            placeholder="Address line 2"
-                        />
-                    </div>
-
-                    <div className='flex flex-col justify-center items-start gap-2 w-full'>
-                        <label className='uppercase font-semibold'>Postal Code</label>
-                        <input
-                            maxLength={30}
-                            required
-                            onChange={(e) => e}
-                            className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
-                            type="text"
-                            placeholder="Postal Code"
-                        />
-                    </div>
-
-                    <div className='flex flex-col justify-center items-start gap-2 w-full'>
-                        <label className='uppercase font-semibold'>City</label>
-                        <input
-                            maxLength={30}
-                            required
-                            onChange={(e) => e}
-                            className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
-                            type="text"
-                            placeholder="City"
-                        />
-                    </div>
-            </div>
-
-            <div className='flex justify-center items-center flex-col gap-4 mt-12 w-1/3'>
                 <h1 className='font-black text-[18px] opacity-90'>Home</h1>
 
                   <div className='flex flex-col justify-center items-start gap-2 w-full'>
