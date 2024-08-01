@@ -14,6 +14,7 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
+  
 
 const page = ({params}) => {
 
@@ -35,15 +36,66 @@ const page = ({params}) => {
   return (
     <div className='flex py-24 pb-44 justify-center items-center flex-col'>
                  <div className='flex justify-center items-center py-12'>
-                    <img src="/assets/step3.png" className='w-[850px]  object-contain' alt="step" />
+                    <img src="/assets/step4.png" className='w-[850px]  object-contain' alt="step" />
                     </div>
 
              <div className='flex justify-center items-center flex-col gap-4 mt-12 w-1/3'>
-                <h1 className='font-black text-[24px]'>Home</h1>
+                <h1 className='font-black text-[24px]'>Roommate</h1>
                 <p className='text-[#0A453A]'>Please note, all these details must be complete in order to apply for adopt a pet.</p>
 
                   <div className='flex flex-col justify-center items-start gap-2 w-full'>
-                        <label className='uppercase font-semibold'>Do you have a garden?</label>
+                        <label className='uppercase font-semibold'>Number of adults</label>
+                        <Select>
+                            <SelectTrigger className="w-[300px]">
+                                <SelectValue placeholder="Select" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                <SelectLabel>Number of adults</SelectLabel>
+                                <SelectItem value="low">1-3</SelectItem>
+                                <SelectItem value="mid">3-5</SelectItem>
+                                <SelectItem value="high">5+</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div className='flex flex-col justify-center items-start gap-2 w-full'>
+                        <label className='uppercase font-semibold'>Number of children</label>
+                        <Select>
+                            <SelectTrigger className="w-[300px]">
+                                <SelectValue placeholder="Select" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                <SelectLabel>Number of children</SelectLabel>
+                                <SelectItem value="low">1-3</SelectItem>
+                                <SelectItem value="mid">3-5</SelectItem>
+                                <SelectItem value="high">5+</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div className='flex flex-col justify-center items-start gap-2 w-full'>
+                        <label className='uppercase font-semibold'>Age of youngest children</label>
+                        <Select>
+                            <SelectTrigger className="w-[300px]">
+                                <SelectValue placeholder="Select" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                <SelectLabel>Number of adults</SelectLabel>
+                                <SelectItem value="low">1-3</SelectItem>
+                                <SelectItem value="mid">3-5</SelectItem>
+                                <SelectItem value="high">5+</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div className='flex flex-col justify-center items-start gap-2 w-full'>
+                        <label className='uppercase font-semibold'>Do you have any flatmates or lodgers?</label>
                         <ToggleButtonGroup
                             required            
                             exclusive
@@ -57,58 +109,7 @@ const page = ({params}) => {
                         </ToggleButtonGroup>
                     </div>
 
-                    <div className='flex flex-col justify-center items-start gap-2 w-full'>
-                        <label className='uppercase font-semibold'>Please describe your living/home situation *</label>
-                        <Select>
-                            <SelectTrigger className="w-[300px]">
-                                <SelectValue placeholder="Select" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                <SelectLabel>Living Situation </SelectLabel>
-                                <SelectItem value="Bad">Bad</SelectItem>
-                                <SelectItem value="Good">Good</SelectItem>
-                                <SelectItem value="Very Good">Very Good</SelectItem>
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                    </div>
-
-                    <div className='flex flex-col justify-center items-start gap-2 w-full'>
-                        <label className='uppercase font-semibold'>Can you describe your household setting *</label>
-                        <Select>
-                            <SelectTrigger className="w-[300px]">
-                                <SelectValue placeholder="Select" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                <SelectLabel>Household Setting </SelectLabel>
-                                <SelectItem value="Bad">Bad</SelectItem>
-                                <SelectItem value="Good">Good</SelectItem>
-                                <SelectItem value="Very Good">Very Good</SelectItem>
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                    </div>
-
-                    <div className='flex flex-col justify-center items-start gap-2 w-full'>
-                        <label className='uppercase font-semibold'>Can you describe the household's typical activity level*</label>
-                        <Select>
-                            <SelectTrigger className="w-[300px]">
-                                <SelectValue placeholder="Select" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                <SelectLabel>Activity Level</SelectLabel>
-                                <SelectItem value="Not Active">Not Active</SelectItem>
-                                <SelectItem value="Active">Active</SelectItem>
-                                <SelectItem value="Very Active">Very Active</SelectItem>
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                    </div>
-
-                    <Link href={`/posts/${params.id}/adopt/roommate`}  className='bg-[#675BC8] text-[#fff] rounded-xl mt-12 p-2 px-4'>Next</Link>
+                    <Link href={`/posts/${params.id}/adopt/other-animals`}  className='bg-[#675BC8] text-[#fff] mt-12 rounded-xl p-2 px-4'>Next</Link>
             </div>
     </div>
   )
