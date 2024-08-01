@@ -63,7 +63,7 @@ const page = ({params}) => {
                         />
                     </div>
 
-                    <Link href={`/posts/${params.id}/adopt/home`}  className='bg-[#675BC8] text-[#fff] rounded-xl p-2 px-4'>Next</Link>
+                    <Link href={`/posts/${params.id}/adopt/home`}  className='bg-[#675BC8] text-[#fff] mt-12 rounded-xl p-2 px-4'>Next</Link>
             </div>
     </div>
   )
