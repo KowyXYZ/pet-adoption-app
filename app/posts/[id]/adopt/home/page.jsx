@@ -3,7 +3,7 @@
 
 import { ToggleButton, ToggleButtonGroup } from '@mui/material'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import {
     Select,
@@ -14,15 +14,17 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
+import { FormContext } from '@/context/FormContext'
 
 const page = ({params}) => {
+    const {handleChange} = useContext(FormContext)
 
     const [position, setPosition] = React.useState("Select")
     const [houseHold, setHouseHold] = useState('Select')
     const [active, setActive] = useState('Select')
 
 
-    const handleChange = (event, newAlignment) => {
+    const handleChangeState = (event, newAlignment) => {
         setAlignment(newAlignment);
         
       };
@@ -51,8 +53,8 @@ const page = ({params}) => {
                             value={alignment}
                             onChange={handleChange}
                             >
-                            <ToggleButton color='primary' className=" w-[150px] h-[40px]" value="male">Yes</ToggleButton>
-                            <ToggleButton color='primary'  className=" w-[150px] h-[40px]" value="female">No</ToggleButton>
+                            <ToggleButton color='primary' className=" w-[150px] h-[40px]" value="yes">Yes</ToggleButton>
+                            <ToggleButton color='primary'  className=" w-[150px] h-[40px]" value="no">No</ToggleButton>
 
                         </ToggleButtonGroup>
                     </div>

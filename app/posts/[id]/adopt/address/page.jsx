@@ -1,10 +1,14 @@
 "use client"
 
 
+import { FormContext } from '@/context/FormContext'
 import Link from 'next/link'
-import React from 'react'
+import React, { useContext } from 'react'
 
 const page = ({params}) => {
+
+    const {handleChange} = useContext(FormContext)
+
   return (
     <div className='flex py-24 pb-44 justify-center items-center flex-col'>
                  <div className='flex justify-center items-center py-12'>
@@ -20,7 +24,7 @@ const page = ({params}) => {
                         <input
                             maxLength={30}
                             required
-                            onChange={(e) => console.log(e)}
+                            onChange={(e) => handleChange(e, "address1")}
                             className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
                             type="text"
                             placeholder="Address line 1"
@@ -32,7 +36,7 @@ const page = ({params}) => {
                         <input
                             maxLength={30}
                             required
-                            onChange={(e) => console.log(e)}
+                            onChange={(e) => handleChange(e, "address2")}
                             className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
                             type="text"
                             placeholder="Address line 2"
@@ -44,7 +48,7 @@ const page = ({params}) => {
                         <input
                             maxLength={30}
                             required
-                            onChange={(e) => console.log(e)}
+                            onChange={(e) => handleChange(e, "postalCode")}
                             className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
                             type="text"
                             placeholder="Postal Code"
@@ -56,7 +60,7 @@ const page = ({params}) => {
                         <input
                             maxLength={30}
                             required
-                            onChange={(e) => console.log(e)}
+                            onChange={(e) => handleChange(e, "city")}
                             className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
                             type="text"
                             placeholder="City"

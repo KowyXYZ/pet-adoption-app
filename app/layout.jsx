@@ -1,3 +1,5 @@
+
+
 import Navbar from '@/components/global/Navbar'
 import React from 'react'
 import '@/styles/globals.css'
@@ -6,6 +8,10 @@ import Footer from '@/components/global/Footer'
 import Provider from '@/components/Provider'
 import "@uploadthing/react/styles.css";
 
+
+
+
+
 const layout = ( {children} ) => {
   return (
     <html>
@@ -13,7 +19,7 @@ const layout = ( {children} ) => {
             <div>
               <Provider>
                 <Navbar/>
-                <BelowNav/>
+                <BelowNav/> 
                 {children}
                 <Footer/>
               </Provider>

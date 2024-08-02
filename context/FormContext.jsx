@@ -1,10 +1,13 @@
 // app/context/FormContext.js
-"use client"
-import React, { createContext, useContext, useState } from 'react';
+"use client";
 
-const FormContext = createContext();
 
-export const FormProvider = ({ children }) => {
+import React, { createContext, useState } from 'react';
+
+
+export const FormContext = createContext();
+
+const FormProvider = ({ children }) => {
   const [formState, setFormState] = useState({
     address1: '',
     address2: '',
@@ -25,11 +28,18 @@ export const FormProvider = ({ children }) => {
     describeExp: ''
   });
 
+  const handleChange = (e, name) => {
+    setFormState((prev) => ({...prev, [name]: e.target.value}));
+    localStorage.setItem('SubmitForm', JSON.stringify(formState))
+  };
+
+  console.log(formState)
+
   return (
-    <FormContext.Provider value={{ formState, setFormState }}>
+    <FormContext.Provider value={{ formState, setFormState, handleChange }}>
       {children}
     </FormContext.Provider>
   );
 };
 
-export const useFormContext = () => useContext(FormContext);
+export default FormProvider;
