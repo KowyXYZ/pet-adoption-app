@@ -3,7 +3,7 @@
 
 import { ToggleButton, ToggleButtonGroup } from '@mui/material'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import {
     Select,
@@ -14,19 +14,33 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
+import { FormContext } from '@/context/FormContext'
   
 
 const page = ({params}) => {
 
-    const [position, setPosition] = React.useState("Select")
-    const [houseHold, setHouseHold] = useState('Select')
-    const [active, setActive] = useState('Select')
+    const {handleChange, directChange} = useContext(FormContext)
+
+    const [adults, setAdults] = React.useState("")
+    const [children, setChildren] = useState('')
+    const [age, setAge] = useState('')
+    const [lodgers, setLodgers] = useState('')
+
+    useEffect(() => {
+        directChange(adults, 'numberOfAdults')
+        directChange(children, 'numberOfChildren')
+        directChange(age, 'ageOfChild')
+        directChange(lodgers, 'flatmates')
+      }, [adults,children,age,lodgers])
+      
 
 
-    const handleChange = (event, newAlignment) => {
+      const handleChangeState = (event, newAlignment) => {
         setAlignment(newAlignment);
-        
+        handleChange(event, 'garden')
       };
+
+
      const [alignment, setAlignment] = useState(null);
 
      useEffect(() => {
@@ -45,16 +59,16 @@ const page = ({params}) => {
 
                   <div className='flex flex-col justify-center items-start gap-2 w-full'>
                         <label className='uppercase font-semibold'>Number of adults</label>
-                        <Select>
+                        <Select onValueChange={setAdults}t>
                             <SelectTrigger className="w-[300px]">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
                                 <SelectLabel>Number of adults</SelectLabel>
-                                <SelectItem value="low">1-3</SelectItem>
-                                <SelectItem value="mid">3-5</SelectItem>
-                                <SelectItem value="high">5+</SelectItem>
+                                <SelectItem value="1-3">1-3</SelectItem>
+                                <SelectItem value="3-5">3-5</SelectItem>
+                                <SelectItem value="5+">5+</SelectItem>
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
@@ -62,16 +76,16 @@ const page = ({params}) => {
 
                     <div className='flex flex-col justify-center items-start gap-2 w-full'>
                         <label className='uppercase font-semibold'>Number of children</label>
-                        <Select>
+                        <Select onValueChange={setChildren}>
                             <SelectTrigger className="w-[300px]">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
                                 <SelectLabel>Number of children</SelectLabel>
-                                <SelectItem value="low">1-3</SelectItem>
-                                <SelectItem value="mid">3-5</SelectItem>
-                                <SelectItem value="high">5+</SelectItem>
+                                <SelectItem value="1-3">1-3</SelectItem>
+                                <SelectItem value="3-5">3-5</SelectItem>
+                                <SelectItem value="5+">5+</SelectItem>
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
@@ -79,16 +93,16 @@ const page = ({params}) => {
 
                     <div className='flex flex-col justify-center items-start gap-2 w-full'>
                         <label className='uppercase font-semibold'>Age of youngest children</label>
-                        <Select>
+                        <Select onValueChange={setAge}>
                             <SelectTrigger className="w-[300px]">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
                                 <SelectLabel>Number of adults</SelectLabel>
-                                <SelectItem value="low">1-3</SelectItem>
-                                <SelectItem value="mid">3-5</SelectItem>
-                                <SelectItem value="high">5+</SelectItem>
+                                <SelectItem value="1-3">1-3</SelectItem>
+                                <SelectItem value="3-5">3-5</SelectItem>
+                                <SelectItem value="5+">5+</SelectItem>
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
@@ -101,10 +115,10 @@ const page = ({params}) => {
                             exclusive
                             aria-label="Platform"
                             value={alignment}
-                            onChange={handleChange}
+                            onChange={handleChangeState}
                             >
-                            <ToggleButton color='primary' className=" w-[150px] h-[40px]" value="male">Yes</ToggleButton>
-                            <ToggleButton color='primary'  className=" w-[150px] h-[40px]" value="female">No</ToggleButton>
+                            <ToggleButton color='primary' className=" w-[150px] h-[40px]" value="yes">Yes</ToggleButton>
+                            <ToggleButton color='primary'  className=" w-[150px] h-[40px]" value="no">No</ToggleButton>
 
                         </ToggleButtonGroup>
                     </div>

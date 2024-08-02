@@ -7,7 +7,10 @@ import React, { useContext } from 'react'
 
 const page = ({params}) => {
 
-    const {handleChange} = useContext(FormContext)
+    const {handleChange, formState} = useContext(FormContext)
+
+    const validState = formState.address1 !== '' && formState.address2 !== '' && formState.postalCode !== '' && formState.city !== '' 
+    
 
   return (
     <div className='flex py-24 pb-44 justify-center items-center flex-col'>
@@ -34,8 +37,7 @@ const page = ({params}) => {
                     <div className='flex flex-col justify-center items-start gap-2 w-full'>
                         <label className='uppercase font-semibold'>Address line 2</label>
                         <input
-                            maxLength={30}
-                            required
+                            maxLength={30}                    
                             onChange={(e) => handleChange(e, "address2")}
                             className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
                             type="text"
@@ -66,8 +68,10 @@ const page = ({params}) => {
                             placeholder="City"
                         />
                     </div>
+                   
 
-                    <Link href={`/posts/${params.id}/adopt/home`}  className='bg-[#675BC8] text-[#fff] mt-12 rounded-xl p-2 px-4'>Next</Link>
+                   <Link href={`/posts/${params.id}/adopt/home`}  className='bg-[#675BC8] text-[#fff] mt-12 rounded-xl p-2 px-4'>Next</Link> 
+                  
             </div>
     </div>
   )

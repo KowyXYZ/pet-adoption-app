@@ -17,21 +17,31 @@ import {
 import { FormContext } from '@/context/FormContext'
 
 const page = ({params}) => {
-    const {handleChange} = useContext(FormContext)
+    const {handleChange, directChange} = useContext(FormContext)
 
-    const [position, setPosition] = React.useState("Select")
-    const [houseHold, setHouseHold] = useState('Select')
-    const [active, setActive] = useState('Select')
+    const [situation, setSituation] = useState("")
+    const [houseHold, setHouseHold] = useState('')
+    const [active, setActive] = useState('')
+
+    useEffect(() => {
+      directChange(situation, 'homeSituation')
+      directChange(houseHold, 'householdSetting')
+      directChange(active, 'activityLevel')
+    }, [situation,houseHold,active])
+    
+    
 
 
     const handleChangeState = (event, newAlignment) => {
         setAlignment(newAlignment);
+        handleChange(event, 'garden')
         
       };
      const [alignment, setAlignment] = useState(null);
 
      useEffect(() => {
         console.log(alignment); 
+       
     }, [alignment]); 
     
   return (
@@ -51,7 +61,7 @@ const page = ({params}) => {
                             exclusive
                             aria-label="Platform"
                             value={alignment}
-                            onChange={handleChange}
+                            onChange={handleChangeState}
                             >
                             <ToggleButton color='primary' className=" w-[150px] h-[40px]" value="yes">Yes</ToggleButton>
                             <ToggleButton color='primary'  className=" w-[150px] h-[40px]" value="no">No</ToggleButton>
@@ -61,13 +71,13 @@ const page = ({params}) => {
 
                     <div className='flex flex-col justify-center items-start gap-2 w-full'>
                         <label className='uppercase font-semibold'>Please describe your living/home situation *</label>
-                        <Select>
+                        <Select onValueChange={setSituation}>
                             <SelectTrigger className="w-[300px]">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
-                                <SelectLabel>Living Situation </SelectLabel>
+                                <SelectLabel>Living Situation</SelectLabel>
                                 <SelectItem value="Bad">Bad</SelectItem>
                                 <SelectItem value="Good">Good</SelectItem>
                                 <SelectItem value="Very Good">Very Good</SelectItem>
@@ -78,7 +88,7 @@ const page = ({params}) => {
 
                     <div className='flex flex-col justify-center items-start gap-2 w-full'>
                         <label className='uppercase font-semibold'>Can you describe your household setting *</label>
-                        <Select>
+                        <Select onValueChange={setHouseHold}>
                             <SelectTrigger className="w-[300px]">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
@@ -95,7 +105,7 @@ const page = ({params}) => {
 
                     <div className='flex flex-col justify-center items-start gap-2 w-full'>
                         <label className='uppercase font-semibold'>Can you describe the household's typical activity level*</label>
-                        <Select>
+                        <Select onValueChange={setActive}>
                             <SelectTrigger className="w-[300px]">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>

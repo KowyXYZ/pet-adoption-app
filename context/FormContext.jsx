@@ -8,23 +8,23 @@ import React, { createContext, useState } from 'react';
 export const FormContext = createContext();
 
 const FormProvider = ({ children }) => {
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState(localStorage.getItem('SubmitForm') ? JSON.parse(localStorage.getItem('SubmitForm')): {
     address1: '',
     address2: '',
     postalCode: '',
     city: '',
-    garden: false,
+    garden: '',
     homeSituation: '',
     householdSetting: '',
     activityLevel: '',
     numberOfAdults: '',
     numberOfChildren: '',
     ageOfChild: '',
-    flatmates: false,
-    animalsAtHome: false,
+    flatmates: '',
+    animalsAtHome: '',
     ifAnimalYesDesc: '',
-    ifAnimalNeutered: false,
-    ifAnimalVaccinated: false,
+    ifAnimalNeutered: '',
+    ifAnimalVaccinated: '',
     describeExp: ''
   });
 
@@ -33,10 +33,15 @@ const FormProvider = ({ children }) => {
     localStorage.setItem('SubmitForm', JSON.stringify(formState))
   };
 
+  const directChange = (value, name) => {
+    setFormState((prev) => ({...prev, [name]: value}))
+    localStorage.setItem('SubmitForm', JSON.stringify(formState))
+  }
+
   console.log(formState)
 
   return (
-    <FormContext.Provider value={{ formState, setFormState, handleChange }}>
+    <FormContext.Provider value={{ formState, setFormState, handleChange, directChange }}>
       {children}
     </FormContext.Provider>
   );
