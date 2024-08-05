@@ -17,7 +17,7 @@ import {
 import { FormContext } from '@/context/FormContext'
 
 const page = ({params}) => {
-    const {handleChange, directChange} = useContext(FormContext)
+    const {handleChange, directChange, formState} = useContext(FormContext)
 
     const [situation, setSituation] = useState("")
     const [houseHold, setHouseHold] = useState('')
@@ -60,7 +60,7 @@ const page = ({params}) => {
                             required            
                             exclusive
                             aria-label="Platform"
-                            value={alignment}
+                            value={formState.garden}
                             onChange={handleChangeState}
                             >
                             <ToggleButton color='primary' className=" w-[150px] h-[40px]" value="yes">Yes</ToggleButton>
@@ -71,7 +71,7 @@ const page = ({params}) => {
 
                     <div className='flex flex-col justify-center items-start gap-2 w-full'>
                         <label className='uppercase font-semibold'>Please describe your living/home situation *</label>
-                        <Select onValueChange={setSituation}>
+                        <Select onValueChange={setSituation} value={formState.homeSituation}>
                             <SelectTrigger className="w-[300px]">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
@@ -88,7 +88,7 @@ const page = ({params}) => {
 
                     <div className='flex flex-col justify-center items-start gap-2 w-full'>
                         <label className='uppercase font-semibold'>Can you describe your household setting *</label>
-                        <Select onValueChange={setHouseHold}>
+                        <Select onValueChange={setHouseHold} value={formState.householdSetting}>
                             <SelectTrigger className="w-[300px]">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
@@ -105,7 +105,7 @@ const page = ({params}) => {
 
                     <div className='flex flex-col justify-center items-start gap-2 w-full'>
                         <label className='uppercase font-semibold'>Can you describe the household's typical activity level*</label>
-                        <Select onValueChange={setActive}>
+                        <Select onValueChange={setActive} value={formState.activityLevel}>
                             <SelectTrigger className="w-[300px]">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>

@@ -3,7 +3,7 @@
 
 import { ToggleButton, ToggleButtonGroup } from '@mui/material'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import {
     Select,
@@ -14,23 +14,55 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
+import { FormContext } from '@/context/FormContext'
+import { useRouter } from 'next/navigation'
   
 
 const page = ({params}) => {
+
+   const router = useRouter()
+
+    const {handleChange, formState} = useContext(FormContext)
+
+    const validState = formState.animalsAtHome !== '' && formState.neurateHome !== '' && formState.vaccinatedHome !== '' && formState.city !== '' 
+    
 
     const [position, setPosition] = React.useState("Select")
     const [houseHold, setHouseHold] = useState('Select')
     const [active, setActive] = useState('Select')
 
 
-    const handleChange = (event, newAlignment) => {
-        setAlignment(newAlignment);
-        
-      };
+    
      const [alignment, setAlignment] = useState(null);
+     const [animalsAtHome, setAnimalsAtHome] = useState('')
+     const [neurateHome, setNeurateHome] = useState('')
+     const [vaccinatedHome, setVaccinatedHome] = useState('')
+
+     const handleChangeAnimalsHome = (event, newAlignment) => {
+        setAnimalsAtHome(newAlignment)
+        handleChange(event, 'animalsAtHome')
+      };
+
+
+      const handleChangeNeutered = (event, newAlignment) => {
+        setNeurateHome(newAlignment)
+        handleChange(event, 'ifAnimalNeutered')
+      };
+
+      const handleChangeVaccinated  = (event, newAlignment) => {
+        setVaccinatedHome(newAlignment)
+        handleChange(event, 'ifAnimalVaccinated')
+      };
+
+      const finishTheForm = () => {
+        console.log(formState)
+        router.push(`/posts/${params.id}/adopt/confirm`)
+      }
 
      useEffect(() => {
-        console.log(alignment); 
+        console.log(animalsAtHome)
+        console.log(neurateHome)
+        console.log(vaccinatedHome)
     }, [alignment]); 
     
   return (
@@ -49,11 +81,11 @@ const page = ({params}) => {
                             required            
                             exclusive
                             aria-label="Platform"
-                            value={alignment}
-                            onChange={handleChange}
+                            value={formState.animalsAtHome}
+                            onChange={handleChangeAnimalsHome}
                             >
-                            <ToggleButton color='primary' className=" w-[150px] h-[40px]" value="male">Yes</ToggleButton>
-                            <ToggleButton color='primary'  className=" w-[150px] h-[40px]" value="female">No</ToggleButton>
+                            <ToggleButton color='primary' className=" w-[150px] h-[40px]" value="yes">Yes</ToggleButton>
+                            <ToggleButton color='primary'  className=" w-[150px] h-[40px]" value="no">No</ToggleButton>
 
                         </ToggleButtonGroup>
                     </div>
@@ -65,7 +97,8 @@ const page = ({params}) => {
                             rows={5}
                             maxLength={200}
                             required
-                            onChange={(e) => console.log(e)}
+                            value={formState.ifAnimalYesDesc}
+                            onChange={(e) => handleChange(e, "ifAnimalYesDesc")}
                             className='p-2 outline-none shadow-lg border-[1px] w-full resize-none rounded-lg'
                             type="text"
                             placeholder="If yes, text goes here!"
@@ -78,8 +111,8 @@ const page = ({params}) => {
                             required            
                             exclusive
                             aria-label="Platform"
-                            value={alignment}
-                            onChange={handleChange}
+                            value={formState.ifAnimalNeutered}
+                            onChange={handleChangeNeutered}
                             >
                             <ToggleButton color='primary' className=" w-[150px] h-[40px]" value="yes">Yes</ToggleButton>
                             <ToggleButton color='primary'  className=" w-[150px] h-[40px]" value="no">No</ToggleButton>
@@ -93,8 +126,8 @@ const page = ({params}) => {
                             required            
                             exclusive
                             aria-label="Platform"
-                            value={alignment}
-                            onChange={handleChange}
+                            value={formState.ifAnimalVaccinated}
+                            onChange={handleChangeVaccinated}
                             >
                             <ToggleButton color='primary' className=" w-[150px] h-[40px]" value="yes">Yes</ToggleButton>
                             <ToggleButton color='primary'  className=" w-[150px] h-[40px]" value="no">No</ToggleButton>
@@ -109,14 +142,15 @@ const page = ({params}) => {
                             rows={5}
                             maxLength={200}
                             required
-                            onChange={(e) => console.log(e)}
+                            value={formState.describeExp}
+                            onChange={(e) => handleChange(e, "describeExp")}
                             className='p-2 outline-none shadow-lg border-[1px] w-full resize-none rounded-lg'
                             type="text"
                             placeholder="Describe it here"
                         />
                     </div>
 
-                    <Link href={`/posts/${params.id}/adopt/confirm`}  className='bg-[#675BC8] text-[#fff] mt-12 rounded-xl p-2 px-4'>Confirm</Link>
+                    <button onClick={finishTheForm} className='bg-[#675BC8] text-[#fff] mt-12 rounded-xl p-2 px-4'>Confirm</button>
             </div>
     </div>
   )

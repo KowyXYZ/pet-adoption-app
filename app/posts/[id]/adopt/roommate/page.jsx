@@ -19,7 +19,7 @@ import { FormContext } from '@/context/FormContext'
 
 const page = ({params}) => {
 
-    const {handleChange, directChange} = useContext(FormContext)
+    const {handleChange, directChange, formState} = useContext(FormContext)
 
     const [adults, setAdults] = React.useState("")
     const [children, setChildren] = useState('')
@@ -30,14 +30,13 @@ const page = ({params}) => {
         directChange(adults, 'numberOfAdults')
         directChange(children, 'numberOfChildren')
         directChange(age, 'ageOfChild')
-        directChange(lodgers, 'flatmates')
       }, [adults,children,age,lodgers])
       
 
 
       const handleChangeState = (event, newAlignment) => {
         setAlignment(newAlignment);
-        handleChange(event, 'garden')
+        handleChange(event, 'flatmates')
       };
 
 
@@ -114,7 +113,7 @@ const page = ({params}) => {
                             required            
                             exclusive
                             aria-label="Platform"
-                            value={alignment}
+                            value={formState.flatmates}
                             onChange={handleChangeState}
                             >
                             <ToggleButton color='primary' className=" w-[150px] h-[40px]" value="yes">Yes</ToggleButton>

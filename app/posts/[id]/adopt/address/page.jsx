@@ -28,6 +28,7 @@ const page = ({params}) => {
                             maxLength={30}
                             required
                             onChange={(e) => handleChange(e, "address1")}
+                            value={formState.address1}
                             className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
                             type="text"
                             placeholder="Address line 1"
@@ -39,6 +40,7 @@ const page = ({params}) => {
                         <input
                             maxLength={30}                    
                             onChange={(e) => handleChange(e, "address2")}
+                            value={formState.address2}
                             className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
                             type="text"
                             placeholder="Address line 2"
@@ -51,6 +53,7 @@ const page = ({params}) => {
                             maxLength={30}
                             required
                             onChange={(e) => handleChange(e, "postalCode")}
+                            value={formState.postalCode}
                             className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
                             type="text"
                             placeholder="Postal Code"
@@ -63,6 +66,7 @@ const page = ({params}) => {
                             maxLength={30}
                             required
                             onChange={(e) => handleChange(e, "city")}
+                            value={formState.city}
                             className='p-2 outline-none shadow-lg border-[1px] w-full rounded-lg'
                             type="text"
                             placeholder="City"
