@@ -45,7 +45,8 @@ const handler = NextAuth({
                             email: '',
                             text: '',
                             location: ''
-                        }
+                        },
+                        messages: []
                     })
                 }
     

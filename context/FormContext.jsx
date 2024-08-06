@@ -38,7 +38,7 @@ const FormProvider = ({ children }) => {
     localStorage.setItem('SubmitForm', JSON.stringify(formState))
   }
 
-  console.log(formState)
+  // console.log(formState)
 
   return (
     <FormContext.Provider value={{ formState, setFormState, handleChange, directChange }}>

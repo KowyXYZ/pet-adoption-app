@@ -34,6 +34,9 @@ const UserSchema = new Schema({
         location: {
             type: String,
         }
+    },
+    messages: {
+        type: Array
     }
 })
 

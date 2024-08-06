@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 
 
@@ -10,7 +11,7 @@ const page = () => {
         
     const [userData, setUserData] = useState([]);
 
-    
+    const router = useRouter()
 
     const {data: session} = useSession()
 
@@ -68,6 +69,7 @@ const page = () => {
             })
             if(response.ok){
                 console.log('Done')
+                router.push(`/`)
             }
         } catch (error) {
             console.log(error)

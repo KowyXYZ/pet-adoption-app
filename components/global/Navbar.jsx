@@ -3,6 +3,7 @@
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+
 import { DropdownMenuCheckboxes } from '../ui/dropdown-menu'
 import {
     DropdownMenu,
@@ -61,7 +62,7 @@ const Navbar = () => {
       }
     }, [session?.user?.id]);
 
-    console.log(userData)
+    // console.log(userData)
 
     const ifComplete = userData?.description?.email &&  userData?.description?.location && userData?.description?.phone
     
@@ -105,6 +106,12 @@ const Navbar = () => {
                         <DropdownMenuItem>
                               {ifComplete ?  <Link href='/create-post'>Create Post</Link> : <button onClick={() => {alert('GO SET UP YOUR PROFILE! YOU CANNOT CREATE POST OR ADOPT PETS WITHOUT SETTING UP YOUR PROFILE')}}>Create Post</button>}
                         </DropdownMenuItem>
+
+                        <DropdownMenuItem className='flex gap-8'>
+                             <Link href='/messages'>Messages</Link>
+                             <p className='text-[red]'>{userData?.messages?.length}</p>
+                        </DropdownMenuItem>
+
                         <DropdownMenuItem>
                             <button onClick={() => signOut()}>Sign Out</button>
                         </DropdownMenuItem>

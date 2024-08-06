@@ -9,9 +9,10 @@ import { FormControl, InputLabel, MenuItem } from '@mui/material';
 
 import { UploadButton } from "@/utils/uploadthing";
 import { Separator } from '@radix-ui/react-dropdown-menu';
+import { useRouter } from 'next/navigation'
 
 const page = () => {
-
+    const router = useRouter()
 
      const {data: session} = useSession()
 
@@ -68,16 +69,24 @@ const page = () => {
      };
 
     const [alignment, setAlignment] = useState(null);
+    const [breed, setBreed] = useState(null)
 
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
-        
-      };
+        setPostInfo(prev => ({ ...prev, gender: newAlignment }));
+    };
 
+    const handleChangeBreed = (event, newAlignment) => {
+        setBreed(newAlignment);
+        setPostInfo(prev => ({ ...prev, breed: newAlignment }));
+    };
       useEffect(() => {
         console.log(alignment); 
-        setPostInfo({...postInfo, gender: alignment});// This will log the updated value of alignment whenever it changes
-    }, [alignment]); // Dependency array ensures this effect runs whenever alignment changes
+        console.log(breed)
+        // setPostInfo({...postInfo, gender: alignment});// This will log the updated value of alignment whenever it changes
+        // setPostInfo({...postInfo, breed: breed});
+        console.log(postInfo)
+    }, [alignment, breed]); // Dependency array ensures this effect runs whenever alignment changes
 
 
     if (!session) {
@@ -136,6 +145,7 @@ const page = () => {
             
             if(response.ok) {
                 console.log('ALLGOODDD')
+                router.push(`/`)
               }
 
         } catch (error) {
@@ -186,7 +196,18 @@ const page = () => {
 
                     <div className='flex flex-col justify-center items-start gap-2'>
                         <label className='uppercase font-semibold'>Pet Breed</label>
-                        <input maxLength={10} required onChange={(e) => setPostInfo({...postInfo, breed: e.target.value})} className='p-2 outline-none shadow-lg border-[1px] w-[300px] rounded-lg' type="text" placeholder="Pet's Breed"/>
+                        <ToggleButtonGroup
+                            required            
+                            exclusive
+                            aria-label="Platform"
+                            value={breed}
+                            onChange={handleChangeBreed}
+                            >
+                            <ToggleButton color='primary' className=" w-[150px] h-[40px]" value="dog">Dog</ToggleButton>
+                            <ToggleButton color='primary'  className=" w-[150px] h-[40px]" value="cat">Cat</ToggleButton>
+
+                        </ToggleButtonGroup>           
+                        {/* <input maxLength={10} required onChange={(e) => setPostInfo({...postInfo, breed: e.target.value})} className='p-2 outline-none shadow-lg border-[1px] w-[300px] rounded-lg' type="text" placeholder="Pet's Breed"/> */}
                     </div>
                 </div>
                 

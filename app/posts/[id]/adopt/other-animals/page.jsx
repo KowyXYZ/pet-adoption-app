@@ -54,16 +54,37 @@ const page = ({params}) => {
         handleChange(event, 'ifAnimalVaccinated')
       };
 
+      const sendForm = async () => {
+        try {
+            const response = await fetch('/api/submitForm', {
+              method: "POST",
+              body: JSON.stringify({
+                postid: params.id,
+                formState: formState
+              })
+            });
+            if(response.ok) {
+              console.log('ALLGOODDD FORM')
+              router.push(`/posts/${params.id}/adopt/confirm`)
+            }
+        } catch (error) {
+            console.error('Failed to fetch posts:', error);
+        }
+    };
+
       const finishTheForm = () => {
         console.log(formState)
-        router.push(`/posts/${params.id}/adopt/confirm`)
+        
+
+        sendForm()
+
       }
 
      useEffect(() => {
         console.log(animalsAtHome)
         console.log(neurateHome)
         console.log(vaccinatedHome)
-    }, [alignment]); 
+    }, [animalsAtHome, neurateHome, vaccinatedHome]); 
     
   return (
     <div className='flex py-24 pb-44 justify-center items-center flex-col'>
@@ -150,7 +171,7 @@ const page = ({params}) => {
                         />
                     </div>
 
-                    <button onClick={finishTheForm} className='bg-[#675BC8] text-[#fff] mt-12 rounded-xl p-2 px-4'>Confirm</button>
+                    <button onClick={() =>  finishTheForm()} className='bg-[#675BC8] text-[#fff] mt-12 rounded-xl p-2 px-4'>Confirm</button>
             </div>
     </div>
   )
