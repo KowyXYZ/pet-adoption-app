@@ -5,7 +5,7 @@ import Post from "@/models/post";
 
 export const POST = async(req, res) => {
 
-    const { postid, formState } = await req.json()
+    const { postid, formState, newId } = await req.json()
 
     try {
         await connectToDB();

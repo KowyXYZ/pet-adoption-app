@@ -4,6 +4,7 @@
 import { ToggleButton, ToggleButtonGroup } from '@mui/material'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
+import { v4 as uuid } from "uuid";
 
 import {
     Select,
@@ -16,13 +17,17 @@ import {
   } from "@/components/ui/select"
 import { FormContext } from '@/context/FormContext'
 import { useRouter } from 'next/navigation'
-  
+
 
 const page = ({params}) => {
 
    const router = useRouter()
 
-    const {handleChange, formState} = useContext(FormContext)
+   const unique_id = uuid();
+    const newId = unique_id.slice(0, 12);
+    
+
+    const {handleChange, formState, directChange} = useContext(FormContext)
 
     const validState = formState.animalsAtHome !== '' && formState.neurateHome !== '' && formState.vaccinatedHome !== '' && formState.city !== '' 
     
@@ -60,7 +65,7 @@ const page = ({params}) => {
               method: "POST",
               body: JSON.stringify({
                 postid: params.id,
-                formState: formState
+                formState: formState,
               })
             });
             if(response.ok) {
@@ -74,7 +79,7 @@ const page = ({params}) => {
 
       const finishTheForm = () => {
         console.log(formState)
-        
+      
 
         sendForm()
 

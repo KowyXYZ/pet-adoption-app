@@ -1,14 +1,25 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import Card from '@/components/Card'
-
+import { v4 as uuid } from "uuid";
+import { FormContext } from '@/context/FormContext'
+import { useRouter } from 'next/navigation'
+    
 
 
 const page = ({params}) => {
 
+    const router = useRouter()
+
+
     const {data: session} = useSession()
+
+    const unique_id = uuid();
+    const newId = unique_id.slice(0, 12);
+
+    const {handleChange, formState, directChange} = useContext(FormContext)
 
     const [imageError, setImageError] = React.useState(false);
     
@@ -17,6 +28,20 @@ const page = ({params}) => {
     const handleImageError = () => {
       setImageError(true);
     };
+
+    const goNext = () => {
+      directChange(newId, 'id')
+      directChange(session?.user?.name, 'name')
+      directChange(session?.user?.email, 'email')
+      directChange(session?.user?.image, 'image')
+      directChange(userData?.description?.phone, 'phone')
+      
+  
+  
+  
+
+      router.push(`/posts/${params.id}/adopt/address`)
+    }
   
     useEffect(() => {
       const fetchUserData = async () => {
@@ -46,6 +71,8 @@ const page = ({params}) => {
 
     const fullInfo = userData?.description?.email && userData?.description?.location && userData?.description?.phone
 
+  
+
 
   return (
     <div className='w-full py-24 pb-56 '>
@@ -68,7 +95,7 @@ const page = ({params}) => {
                 )}
 
                <div className='flex flex-col justify-center items-start text-start gap-2 '>
-                 <h1>Email/Username: <span className='font-semibold'>{userData?.description?.email}</span></h1>
+                 <h1>Email/Username: <span className='font-semibold'>{session?.user?.email}</span></h1>
                  <h1>Location: <span className='font-semibold'>{userData?.description?.location}</span></h1>
                   <h1>Phone Number: <span className='font-semibold'>{userData?.description?.phone}</span></h1>
                </div>
@@ -78,9 +105,9 @@ const page = ({params}) => {
 
             <div>
                 {fullInfo ? 
-                <Link href={`/posts/${params.id}/adopt/address`} disabled={fullInfo} className='bg-[#675BC8] text-[#fff] rounded-xl p-2 px-4'>Start</Link>
+                <button onClick={() => goNext()}  className='bg-[#675BC8] text-[#fff] rounded-xl p-2 px-4'>Start</button>
                      :
-                <button disabled className='bg-[#675BC8] text-[#fff] rounded-xl p-2 px-4'>Fill the rest of the information to continue</button>}
+                <button disabled className='bg-[#675BC8] text-[#030303] rounded-xl p-2 px-4'>Fill the rest of the information to continue</button>}
             </div>
 
        

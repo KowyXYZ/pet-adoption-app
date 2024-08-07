@@ -3,12 +3,22 @@
 
 
 import React, { createContext, useState } from 'react';
+import { v4 as uuid } from "uuid";
 
 
 export const FormContext = createContext();
 
+
+
+// const unique_id = uuid();
+// const newId = unique_id.slice(0, 12);
+
 const FormProvider = ({ children }) => {
   const [formState, setFormState] = useState(localStorage.getItem('SubmitForm') ? JSON.parse(localStorage.getItem('SubmitForm')): {
+    name: '',
+    email: '',
+    image: '',
+    phone: '',
     address1: '',
     address2: '',
     postalCode: '',
@@ -25,7 +35,8 @@ const FormProvider = ({ children }) => {
     ifAnimalYesDesc: '',
     ifAnimalNeutered: '',
     ifAnimalVaccinated: '',
-    describeExp: ''
+    describeExp: '',
+    id: ''
   });
 
   const handleChange = (e, name) => {
