@@ -132,11 +132,11 @@ const page = () => {
           </div>
         </div>
 
-        <div className='mt-24 flex justify-center items-center flex-col'>
+        <div className='mt-24 flex justify-center items-center gap-8 flex-col'>
           <h1 className='text-[28px] text-center'>Your posts</h1>
           
            <div className='flex  flex-wrap gap-8 justify-center items-center'>
-                  {feedData && feedData.filter(item => item.creatorId === session?.user?.id).map((card, index) => {
+                  {feedData && feedData.slice(0,4).filter(item => item.creatorId === session?.user?.id).map((card, index) => {
                       return(
                           <Card data={card}/>
                       )

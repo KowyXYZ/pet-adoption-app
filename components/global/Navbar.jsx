@@ -75,7 +75,7 @@ const Navbar = () => {
             </Link>
 
             <div className='flex gap-8 justify-center items-center text-[18px]'>
-                <p>Adopt</p>
+                <Link href='/adopt'>Adopt</Link>
                 <p>Care Guide</p>
                 <p>About Us</p>
             </div>

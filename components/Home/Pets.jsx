@@ -29,7 +29,7 @@ const Pets = () => {
         <div className='container mx-auto gap-12 flex justify-center items-center flex-col'>
             <h1 className='text-[32px] text-center'>Take a Look at Some of Our Pets</h1>
             <div className='flex  flex-wrap gap-8 justify-center items-center'>
-                {feedData && feedData.map((card, index) => {
+                {feedData && feedData.slice(0,4).map((card, index) => {
                     return(
                         <Card data={card}/>
                     )

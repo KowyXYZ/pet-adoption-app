@@ -156,8 +156,9 @@ const page = () => {
 
   return (
     <div className='w-full py-12'>
-        <div className='container mx-auto flex justify-center gap-24 items-center'>
+        <div className='container mx-auto flex justify-center gap-24 items-start'>
             <img src="/assets/adoptdog.png" alt="imgforadopting" className=' w-[30%]' />
+            
 
             <div className='flex text-center flex-col gap-6'>
                 <h1 className='text-[32px] leading-tight font-black text-[#0A453A]'>Join the <span className='text-[#675BC8] font-serif'>Furry</span> <span className='text-[#2E256F] font-serif'>Friends</span> Community <br /> and Connect with Dog Lovers!</h1>
