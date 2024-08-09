@@ -4,6 +4,7 @@ import PetNews from '@/components/Home/PetNews'
 import Pets from '@/components/Home/Pets'
 import Reasons from '@/components/Home/Reasons'
 import React from 'react'
+import '@/styles/globals.css'
 
 const page = () => {
   return (
