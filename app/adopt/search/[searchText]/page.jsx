@@ -65,12 +65,12 @@ const SearchPage = ({ params }) => {
         <div className='py-12 container mx-auto flex flex-col items-center'>
             <div className='gap-12 flex justify-start items-center flex-col'>
                 <div className='flex flex-wrap gap-8 justify-start items-center'>
-                    {currentData.map((card, index) => (
+                    {currentData.length > 0 ? currentData.map((card, index) => (
                         <Card key={index} data={card} />
-                    ))}
+                    )) : <p className='py-96'>No Data found, try searching something that acutally exists :D</p>}
                 </div>
 
-                <div className='flex justify-between items-center w-full max-w-md mt-6'>
+                <div className={`${currentData.length > 0 ? 'flex' : 'hidden'} justify-between items-center w-full max-w-md mt-6`}>
                     <button
                         onClick={() => handlePageChange('prev')}
                         disabled={currentPage === 1}

@@ -217,12 +217,12 @@ const Page = () => {
             {/* Cards and Pagination Section */}
             <div className='flex flex-col justify-start items-start w-full'>
                 <div className='flex flex-wrap gap-8 justify-start items-start'>
-                    {currentData.map((card, index) => (
+                     {currentData.length > 0 ? currentData.map((card, index) => (
                         <Card key={index} data={card} />
-                    ))}
+                    )) : <p className='py-96 text-center'>No Data found, try searching something that acutally exists :D</p>}
                 </div>
 
-                <div className='flex justify-center gap-12 items-center w-full  mt-6'>
+                <div className={`${currentData.length > 0 ? 'flex' : 'hidden'} justify-between items-center w-full max-w-md mt-6`}>
                     <button
                         onClick={() => handlePageChange('prev')}
                         disabled={currentPage === 1}

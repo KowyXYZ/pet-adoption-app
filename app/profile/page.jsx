@@ -52,11 +52,11 @@ const page = () => {
 
   useEffect(() => {
       fetchPosts();
+   
   }, [])
   
 
   // feed end
-
 
   if (!session) {
     return (
@@ -150,8 +150,12 @@ const page = () => {
         <div className='mt-24 flex justify-center items-center flex-col'>
           <h1 className='text-[28px] text-center'>You liked these</h1>
           <div className='flex flex-wrap gap-8 justify-center items-center mt-4'>
-              
-          
+              {userData?.favorites?.slice(0,4).map((card, index) => {
+                return(
+                  <Card data={card}/>
+                )
+              })}
+                 
               
           </div>
 
