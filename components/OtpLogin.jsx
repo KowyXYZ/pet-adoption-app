@@ -7,6 +7,7 @@ import {
   signInWithPhoneNumber,
 } from "firebase/auth";
 import React, { FormEvent, useEffect, useState, useTransition } from "react";
+import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 import {
   InputOTP,
   InputOTPGroup,
@@ -17,6 +18,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 const OtpLogin = () => {
+
+  
+    const {data: session} = useSession()
 
     const router = useRouter()
 
@@ -58,7 +62,53 @@ const OtpLogin = () => {
           recaptchaVerifier.clear();
         };
       }, [auth]);
-      
+
+      useEffect(() => {
+        const hasEnteredAllDigits = otp.length === 6;
+        if (hasEnteredAllDigits) {
+          verifyOtp();
+        }
+      }, [otp]);
+
+      const handleSubmit = async() => {
+        try {
+            const response = await fetch('/api/profile/update', {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    phone: phoneNumber,
+                    id: session?.user?.id
+                })
+            })
+            if(response.ok){
+                console.log('Done')
+                router.push(`/profile`)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+       
+    }
+
+      const verifyOtp = async () => {
+        startTransition(async () => {
+          setError("");
+    
+          if (!confirmationResult) {
+            setError("Please request OTP first.");
+            return;
+          }
+    
+          try {
+            await confirmationResult?.confirm(otp);
+            handleSubmit()
+          } catch (error) {
+            console.log(error);
+    
+            setError("Failed to verify OTP. Please check the OTP.");
+          }
+        });
+      };
+
     const requestOtp = async(e) => {
         e?.preventDefault();
 
@@ -93,13 +143,15 @@ const OtpLogin = () => {
               }
             }
           });
-    }
+      }
+
+     
 
     const loadingIndicator = (
         <div role="status" className="flex justify-center">
           <svg
             aria-hidden="true"
-            className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-green-600"
+            className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-[#5D4FC4]"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -119,6 +171,8 @@ const OtpLogin = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
+        <h1 className="font-bold my-4 text-[18px]">{confirmationResult ? <span>Insert the OTP</span> : <p>Inster the new number you want to add in . . . </p>}</h1>
+
         {!confirmationResult && (
             <form onSubmit={requestOtp}>
                  <Input
@@ -130,6 +184,22 @@ const OtpLogin = () => {
                 <p className="text-[gray] mt-3">Please enter your number with the country code (i.e. +381 for SRB)</p>
             </form>
         )}
+
+        {confirmationResult && (
+                <InputOTP maxLength={6} value={otp} onChange={(value) => setOtp(value)}>
+                  <InputOTPGroup>
+                    <InputOTPSlot index={0} />
+                    <InputOTPSlot index={1} />
+                    <InputOTPSlot index={2} />
+                  </InputOTPGroup>
+                  <InputOTPSeparator />
+                  <InputOTPGroup>
+                    <InputOTPSlot index={3} />
+                    <InputOTPSlot index={4} />
+                    <InputOTPSlot index={5} />
+                  </InputOTPGroup>
+                </InputOTP>
+              )}
 
     <Button
         disabled={!phoneNumber || isPending || resendCountdown > 0}

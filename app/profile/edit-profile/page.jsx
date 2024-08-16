@@ -6,6 +6,16 @@ import { useRouter } from 'next/navigation'
 import OtpLogin from '@/components/OtpLogin'
 
 
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import Component from '@/components/EditPage'
+
+
+
 
 const page = () => {
 
@@ -15,6 +25,8 @@ const page = () => {
     const router = useRouter()
 
     const {data: session} = useSession()
+
+    const countires = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua & Deps", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Rep", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Congo {Democratic Rep}", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland {Republic}", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea North", "Korea South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar, {Burma}", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russian Federation", "Rwanda", "St Kitts & Nevis", "St Lucia", "Saint Vincent & the Grenadines", "Samoa", "San Marino", "Sao Tome & Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"]
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -56,14 +68,14 @@ const page = () => {
     const [location, setLocation] = useState('')
 
 
-    const handleSubmit = async() => {
+    const handleSubmit = async(e) => {
+      e?.preventDefault();
+
         try {
             const response = await fetch('/api/profile/update', {
                 method: 'PATCH',
                 body: JSON.stringify({
                     text: description,
-                    email: email,
-                    phone: phone,
                     location: location,
                     id: session?.user?.id
                 })
@@ -88,69 +100,68 @@ const page = () => {
 
 
 
-  
+
   
 
   return (
-    <div className='w-full py-12 '>
-        <div className='container mx-auto flex justify-center items-center flex-col'>
-        <div className='container mx-auto flex justify-center gap-64 items-start '>
-            <div className='flex justify-center items-center gap-4'>
+    <div className='w-full py-24'>
+
+        <div className="flex flex-col items-center justify-center  bg-background">
+      <div className="max-w-md w-full space-y-6 p-6 bg-card rounded-lg shadow-lg">
+        <div className="flex flex-col items-center">
+          <Avatar className="w-[100px] h-[100px] border-4 border-card">
             {!imageError ? (
-                    <img
-                    src={session?.user?.image}
-                    alt={session?.user?.name}
-                    className="w-[100px] h-[100px] rounded-full object-contain border-2 border-[#5D4FC4]"
-                    onError={handleImageError}
-                    />
-                ) : (
-                    <div className="border-2 border-[#5D4FC4] rounded-full w-[50px] h-[50px] flex justify-center items-center">
-                        <img className='w-[20px] h-[20px] object-contain' src="/assets/vectorlogin.png" alt="loginvector" />
-                    </div>
-                )}
-
-                <div className='flex justify-center items-start flex-col'>
-                    <h1 className='text-[24px] text-[#0A453A] font-black capitalize'>{session?.user?.name}</h1>
-                    <textarea value={description} onChange={(e) => setDescription(e.target.value)} maxLength='100' className='border-2 shadow-xl rounded-xl resize-none p-2 outline-none' placeholder="Write you'r description here..." cols='45' rows='3'/>
-                </div>
-
-              
+                      <img
+                      src={session?.user?.image}
+                      alt={session?.user?.name}
+                      className="w-[100px] h-[100px] rounded-full object-contain border-2 border-[#5D4FC4]"
+                      onError={handleImageError}
+                      />
+                  ) : (
+                      <div className="border-2 border-[#5D4FC4] rounded-full w-[50px] h-[50px] flex justify-center items-center">
+                          <img className='w-[20px] h-[20px] object-contain' src="/assets/vectorlogin.png" alt="loginvector" />
+                      </div>
+                  )}
+          </Avatar>
+          <h1 className="text-2xl font-bold mt-4">Edit Profile</h1>
+          <div className="text-sm text-muted-foreground">@{session?.user?.name}</div>
+        </div>
+        <form className="space-y-4">
+          <div className="grid gap-2">
+            <Label htmlFor="phone">Phone Number</Label>
+            <div className='flex gap-6'>
+              <p id="phone" type="tel">{phone}</p>
+              <Link href='/profile/edit-profile/change-phone-number' className='text-gray-400'>Change The Number</Link>
             </div>
-
-
-            <div className='flex justify-center items-center rounded-xl border-[#5D4FC4] border-2 p-1 px-3 gap-2 text-[#5D4FC4] '>
-              <p>✔</p>
-
-              <button onClick={() => handleSubmit()} className='text-[18px]'>
-                Save
-              </button>
-
-    
-            </div>
-            
-        </div>
-
-        <div className='container mx-auto flex gap-24  mt-12 justify-center items-center'>
-
-          <div className='text-[#5D4FC4] flex justify-center items-center gap-2'>
-             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-            </svg>
-
-            <input value={location} onChange={(e) => setLocation(e.target.value)} type='email' className='border-2 px-4 w-[300px] shadow-xl rounded-xl resize-none p-2 outline-none' placeholder="Write you'r location here..." />
           </div>
-
-          <div className='text-[#5D4FC4] flex justify-center items-center gap-2'>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-            </svg>
-            <p className='border-2 px-4 w-[300px] shadow-xl rounded-xl resize-none p-2 outline-none'>{phone}</p>
-            <Link href='/profile/edit-profile/change-phone-number'>Change The Number</Link>
+          <div className="grid gap-2">
+            <Label htmlFor="country">Country</Label>
+            <Select onValueChange={setLocation} value={location} id="country">
+              <SelectTrigger>
+                <SelectValue placeholder="Select country" />
+              </SelectTrigger>
+              <SelectContent>
+                {countires.map((country, index) => {
+                    return(
+                      <SelectItem key={index} value={country}>{country}</SelectItem>
+                    )
+                })}
+              </SelectContent>
+            </Select>
           </div>
-        </div>
-
-        </div>
+          <div className="grid gap-2">
+            <Label htmlFor="description">Description</Label>
+            <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={3} placeholder="Tell us about yourself..." />
+          </div>
+          <Button
+            onClick={() => handleSubmit()}
+            className="w-full bg-[#5D4FC4] text-white hover:bg-[#4d3fb0] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+          >
+            Save Changes
+          </Button>
+        </form>
+      </div>
+    </div>
 
         <h1 className='flex justify-center font-black uppercase mt-96 items-center text-[32px] text-[#0A453A]'>More features will be added soon...</h1>
 
