@@ -2,7 +2,7 @@
 "use client";
 
 
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { v4 as uuid } from "uuid";
 
 
@@ -14,30 +14,64 @@ export const FormContext = createContext();
 // const newId = unique_id.slice(0, 12);
 
 const FormProvider = ({ children }) => {
-  const [formState, setFormState] = useState(localStorage.getItem('SubmitForm') ? JSON.parse(localStorage.getItem('SubmitForm')): {
-    name: '',
-    email: '',
-    image: '',
-    phone: '',
-    address1: '',
-    address2: '',
-    postalCode: '',
-    city: '',
-    garden: '',
-    homeSituation: '',
-    householdSetting: '',
-    activityLevel: '',
-    numberOfAdults: '',
-    numberOfChildren: '',
-    ageOfChild: '',
-    flatmates: '',
-    animalsAtHome: '',
-    ifAnimalYesDesc: '',
-    ifAnimalNeutered: '',
-    ifAnimalVaccinated: '',
-    describeExp: '',
-    id: ''
-  });
+
+  const [formState, setFormState] = useState()
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedValue = localStorage.getItem('SubmitForm') ? JSON.parse(localStorage.getItem('SubmitForm')) : {
+          name: '',
+          email: '',
+          image: '',
+          phone: '',
+          address1: '',
+          address2: '',
+          postalCode: '',
+          city: '',
+          garden: '',
+          homeSituation: '',
+          householdSetting: '',
+          activityLevel: '',
+          numberOfAdults: '',
+          numberOfChildren: '',
+          ageOfChild: '',
+          flatmates: '',
+          animalsAtHome: '',
+          ifAnimalYesDesc: '',
+          ifAnimalNeutered: '',
+          ifAnimalVaccinated: '',
+          describeExp: '',
+          id: ''
+        }
+      setFormState(savedValue)
+    }
+  }, [])
+  
+
+  // const [formState, setFormState] = useState(localStorage.getItem('SubmitForm') ? JSON.parse(localStorage.getItem('SubmitForm')): {
+  //   name: '',
+  //   email: '',
+  //   image: '',
+  //   phone: '',
+  //   address1: '',
+  //   address2: '',
+  //   postalCode: '',
+  //   city: '',
+  //   garden: '',
+  //   homeSituation: '',
+  //   householdSetting: '',
+  //   activityLevel: '',
+  //   numberOfAdults: '',
+  //   numberOfChildren: '',
+  //   ageOfChild: '',
+  //   flatmates: '',
+  //   animalsAtHome: '',
+  //   ifAnimalYesDesc: '',
+  //   ifAnimalNeutered: '',
+  //   ifAnimalVaccinated: '',
+  //   describeExp: '',
+  //   id: ''
+  // });
 
   const handleChange = (e, name) => {
     setFormState((prev) => ({...prev, [name]: e.target.value}));

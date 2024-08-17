@@ -3,6 +3,15 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
 const BelowNav = () => {
 
   const [searchText, setSearchText] = useState('')
@@ -15,7 +24,23 @@ const BelowNav = () => {
 
             <div className=' hidden sm:flex justify-center items-center'>
 
-                 <p>More</p> 
+                <DropdownMenu>
+                    <DropdownMenuTrigger className='outline-none'>Menu</DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuLabel>More</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>
+                            <Link href='/how-it-works-adopters'>How It Works For Adopters</Link>
+                        </DropdownMenuItem>
+
+
+                        <DropdownMenuItem className='flex gap-8'>
+                             <Link href='/how-it-works-rehomers'>How It Works For Rehomers</Link>
+                        </DropdownMenuItem>
+
+
+                    </DropdownMenuContent>
+                    </DropdownMenu> 
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
@@ -23,9 +48,9 @@ const BelowNav = () => {
 
             </div>
 
-            <p>Contact Us</p>
+            <Link className='sm:block hidden' href='/contact'>Contact Us</Link>
 
-            <div className='flex items-center justify-center gap-2 sm:gap-5'>
+            <div className='hidden sm:flex items-center justify-center gap-2 sm:gap-5'>
                 <input onChange={(e) => setSearchText(e.target.value)} type="text" className='sm:w-[250px] w-[200px] outline-none rounded-2xl text-[#1e1e1e] py-1 px-2 placeholder:text-[#1e1e1e] placeholder:opacity-50' placeholder='Search Here ' />
                 <Link href={`/adopt/search/${searchText}`}>
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

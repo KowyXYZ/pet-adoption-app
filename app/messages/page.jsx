@@ -32,7 +32,7 @@ const page = () => {
     <div className='w-full py-12'>
       <div className='container mx-auto flex gap-8 flex-col justify-center items-center'>
         <h1 className='font-black text-[26px]'>{session?.user?.name} - Messages - <span className='text-[red]'>{userData?.messages?.length}</span></h1>
-        <div>
+        <div className={userData?.messages?.length > 4 ? '' : 'h-screen'}>
           {userData?.messages?.map((message, index) => {
           return(
             <Link href={`/messages/${message.id}`} className='border-2 p-2 rounded-xl text-center flex justify-between items-center border-gray-400 w-[300px]'>
