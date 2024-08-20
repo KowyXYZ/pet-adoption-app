@@ -166,16 +166,28 @@ const Navbar = () => {
 
                 {toggle ?
                 
-                <div className='absolute rounded-xl top-10 right-0 border-2 border-[#5D4FC4] bg-[#fff] flex flex-col justify-center items-center gap-4 p-4 w-[200px]'>
-                    <p>Adopt</p>
-                    <p>Care Guide</p>
-                    <p>About Us</p>
-
-                    {session?.user ?
-                    
+                <div className='absolute rounded-xl text-center top-10 right-0 border-2 border-[#5D4FC4] z-10 bg-[#fff] flex flex-col justify-center items-center gap-5 p-4 w-[200px]'>
                     <Link href='/profile' className='border-2 text-[#5D4FC4] rounded-xl border-[#5D4FC4] text-center justify-center items-center flex p-1 px-3 text-[16px]'>
                         <p>{session?.user?.name}</p>
-                </Link>
+                    </Link>
+                    <Link href='/'>Home</Link>
+                    <Link href='/adopt'>Adopt</Link>
+                    <Link href='/care-guide'>Care Guide</Link>
+                    <Link href='/about-us'>About Us</Link>
+                    <Link href='/how-it-works-adopters'>How It Works For Adopters</Link>
+                    <Link href='/how-it-works-rehomers'>How It Works For Rehomers</Link>
+                    <Link href='/contact'>Contact Us</Link>
+                    <Link href='/messages'>Messages</Link>
+                    {session?.user ?
+                    
+                    <>
+                    
+
+                    
+                    <button onClick={() => signOut()}>Sign Out</button>
+                    </>
+
+                
                     
                     :
                     

@@ -9,8 +9,8 @@ const page = () => {
             </div>
         
             <div className='flex flex-col gap-1 my-5 justify-center items-center text-center'>
-                <h1 className='text-[32px] font-semibold'>How it Work For <span className='text-[#0A453A]'>Adapters</span></h1>
-                <p className='text-[#0A453A]'>To guide you through adoption, and so you know what to expect, we ve broken the process down into 5 steps.</p>
+                <h1 className='text-[32px] font-semibold'>How it Work For <span className='text-[#0A453A]'>Rehomers</span></h1>
+                <p className='text-[#0A453A]'>For most people, rehoming a pet is a really difficult but necessary decision. </p>
             </div>
 
             <div className='flex justify-between items-center'>
@@ -27,7 +27,7 @@ const page = () => {
                 
 
                 <div>
-                    <img src="/assets/adopters1.png" alt="adopers" />
+                    <img src="/assets/rehomers1.png" alt="adopers" />
                 </div>
             </div>
 
@@ -47,7 +47,7 @@ const page = () => {
                 
 
                 <div>
-                    <img src="/assets/adopters2.png" alt="adopers" />
+                    <img src="/assets/rehomers2.png" alt="adopers" />
                 </div>
             </div>
 
@@ -66,7 +66,7 @@ const page = () => {
                 
 
                 <div>
-                    <img src="/assets/adopters3.png" alt="adopers" />
+                    <img src="/assets/rehomers3.png" alt="adopers" />
                 </div>
             </div>
 
@@ -85,7 +85,7 @@ const page = () => {
                 
 
                 <div>
-                    <img src="/assets/adopters4.png" alt="adopers" />
+                    <img src="/assets/rehomers4.png" alt="adopers" />
                 </div>
             </div>
 
@@ -103,9 +103,28 @@ const page = () => {
                 
 
                 <div>
-                    <img src="/assets/adopters5.png" alt="adopers" />
+                    <img src="/assets/rehomers5.png" alt="adopers" />
                 </div>
             </div>
+
+            <div className='flex justify-between gap-12 flex-row-reverse items-center'>
+
+                    <div className='flex gap-2 items-start justify-center'>
+                        <h1 className='text-[#41349D] text-center w-[50px] h-[50px] bg-[#b8b8bb] text-[24px] p-1 rounded-full'>6</h1>
+                    <div>
+                            <p className='text-[#0A453A] font-semibold mb-2'>Have a home check and chat to the rehomer</p>
+                            <p>- Make your application using our online enquiry service</p>
+                            <p>- If we think you’re a good match, we’ll approve your application.</p>
+                            <p>- If we need to ask for more information at this stage 
+                            we’ll contact you.</p>
+                    </div>
+                    </div>
+
+
+                    <div>
+                        <img src="/assets/rehomers6.png" alt="adopers" />
+                    </div>
+                    </div>
         </div>
     </div>
   )
