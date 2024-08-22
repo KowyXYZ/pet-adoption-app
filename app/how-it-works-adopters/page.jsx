@@ -13,7 +13,7 @@ const page = () => {
                 <p className='text-[#0A453A]'>To guide you through adoption, and so you know what to expect, we ve broken the process down into 5 steps.</p>
             </div>
 
-            <div className='flex justify-between items-center'>
+            <div className='sm:flex-row flex-col flex justify-between items-center'>
 
                 <div className='flex gap-2 items-start justify-center'>
                      <h1 className='text-[#41349D] text-center w-[50px] h-[50px] bg-[#b8b8bb] text-[24px] p-1 rounded-full'>1</h1>
@@ -32,7 +32,7 @@ const page = () => {
             </div>
 
 
-            <div className='flex justify-between gap-12 flex-row-reverse items-center'>
+            <div className=' sm:flex-row-reverse flex-col flex justify-between gap-12 e items-center'>
 
                 <div className='flex gap-2 items-start justify-center'>
                      <h1 className='text-[#41349D] text-center w-[50px] h-[50px] bg-[#b8b8bb] text-[24px] p-1 rounded-full'>2</h1>
@@ -52,7 +52,7 @@ const page = () => {
             </div>
 
 
-            <div className='flex justify-between items-center'>
+            <div className=' sm:flex-row flex-col flex justify-between items-center'>
 
                 <div className='flex gap-2 items-start justify-center'>
                      <h1 className='text-[#41349D] text-center w-[50px] h-[50px] bg-[#b8b8bb] text-[24px] p-1 rounded-full'>3</h1>
@@ -70,7 +70,7 @@ const page = () => {
                 </div>
             </div>
 
-            <div className='flex justify-between gap-12 flex-row-reverse items-center'>
+            <div className=' sm:flex-row-reverse flex-col flex justify-between gap-12  items-center'>
 
                 <div className='flex gap-2 items-start justify-center'>
                      <h1 className='text-[#41349D] text-center w-[50px] h-[50px] bg-[#b8b8bb] text-[24px] p-1 rounded-full'>4</h1>
@@ -89,7 +89,7 @@ const page = () => {
                 </div>
             </div>
 
-            <div className='flex justify-between items-center'>
+            <div className='sm:flex-row flex-col flex justify-between items-center'>
 
                 <div className='flex gap-2 items-start justify-center'>
                      <h1 className='text-[#41349D] text-center w-[50px] h-[50px] bg-[#b8b8bb] text-[24px] p-1 rounded-full'>5</h1>

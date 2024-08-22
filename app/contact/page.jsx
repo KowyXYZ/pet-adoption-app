@@ -3,7 +3,7 @@ import React from 'react'
 const page = () => {
   return (
     <div className='py-12 w-full'>
-        <div className='container mx-auto flex justify-center items-start gap-5'>
+        <div className='container flex-col sm:flex-row mx-auto flex justify-center items-start gap-5'>
             <div className='gap-5 flex flex-col'>
                 <h1 className='text-[#0A453A] font-semibold text-[22px]'>Contact Us</h1>
                 <p>Get in touch with our team by choosing what kind of our services you are looking for.</p>

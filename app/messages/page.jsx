@@ -31,11 +31,11 @@ const page = () => {
   return (
     <div className='w-full py-12'>
       <div className='container mx-auto flex gap-8 flex-col justify-center items-center'>
-        <h1 className='font-black text-[26px]'>{session?.user?.name} - Messages - <span className='text-[red]'>{userData?.messages?.length}</span></h1>
+        <h1 className='font-black text-[22px] sm:text-[26px]'>{session?.user?.name} - Messages - <span className='text-[red]'>{userData?.messages?.length}</span></h1>
         <div className={userData?.messages?.length > 4 ? '' : 'h-screen'}>
           {userData?.messages?.map((message, index) => {
           return(
-            <Link href={`/messages/${message.id}`} className='border-2 p-2 rounded-xl text-center flex justify-between items-center border-gray-400 w-[300px]'>
+            <Link href={`/messages/${message.id}`} className='mb-5 border-2 p-2 rounded-xl text-center flex justify-between items-center border-gray-400 w-[300px]'>
                 <h1 className='uppercase font-semibold'>Message No {index + 1}</h1>
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

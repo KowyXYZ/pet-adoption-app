@@ -42,7 +42,7 @@ const page = ({params}) => {
       <div>
         {userData?.messages?.filter((item) => item.id === params.msgId).map((msg, index) => {
           return(
-            <div key={index} className='border-2 w-[500px] flex text-[18px] gap-4 flex-col justify-center items-start rounded-xl p-8'>
+            <div key={index} className='border-2 sm:w-[500px] w-[300px] flex text-[18px] gap-4 flex-col justify-center items-start rounded-xl p-8'>
 
               <h1 className='text-[20px] font-black uppercase text-[#675BC8]'>Request for Adoption</h1>
 

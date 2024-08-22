@@ -106,9 +106,9 @@ const Page = () => {
     const totalPages = Math.ceil(filteredData.length / cardsPerPage);
 
     return (
-        <div className='py-24 mx-24 flex'>
+        <div className='sm:py-24 sm:mx-24 py-12 mx-12 gap-12 sm:gap-0 flex flex-col sm:flex-row justify-center items-center md:items-start'>
             {/* Filters Section */}
-            <div className='flex flex-col items-start justify-start w-1/4 pr-6'>
+            <div className='flex flex-col items-start justify-start sm:w-1/4 sm:pr-6'>
                 <div className='border-b-2 gap-32 flex justify-between items-center text-[#5D4FC4]'>
                     <p>Filters</p>
                     <button
